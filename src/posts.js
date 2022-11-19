@@ -41,7 +41,7 @@ const Posts = () => {
   if (!result) return <h1>Loading...</h1>;
 
   const toRead = result[1].data.children.map((post) => {
-    return `${post.data.author}, ${post.data.author_flair_richtext[1]?.t ?? ""}
+    return `${post.data.author},
     }, ${Math.floor(
       (now - test[1].data.children[0].data.created_utc) / (60 * 60)
     )} hours ago.  ${post.data.body}. ${post.data.score > 0 && "+"}${

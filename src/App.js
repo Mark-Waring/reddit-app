@@ -4,7 +4,7 @@ import Posts from "./posts";
 function App() {
   return (
     <>
-      <h2>Reddit Post</h2>
+      <h1>Reddit App</h1>
       <Posts />
     </>
   );
