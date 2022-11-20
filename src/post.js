@@ -1,22 +1,17 @@
 import React from "react";
 
-const Post = ({ author, flair, time, body, score, replies }) => {
+const Post = ({ author, flair, time, body, score, replyNumber }) => {
   return (
     <>
       <div>
-        {author} - {flair} {+" "}
-        {Math.floor(time / (60 * 60))} hours ago.
+        {author} {flair && "- "} {flair} - {time}
       </div>
       <div>{body}</div>
       <div>
         {score > 0 && "+"}
         {score}
       </div>
-      <div>
-        {replies > 0 && replies}
-        {replies === 1 && " reply"}
-        {replies > 1 && " replies"}
-      </div>
+      <div>{replyNumber === 1 ? " 1 reply" : ` ${replyNumber} replies`}</div>
     </>
   );
 };
