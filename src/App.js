@@ -1,16 +1,18 @@
-import { useContext } from "react";
-import { AppContext } from "./AppContext";
 import "./index.css";
 import ThreadSelection from "./ThreadSelection";
-import SavedThreads from "./SavedThreads";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Posts from "./Posts";
 
 function App() {
-  const { searchUrl } = useContext(AppContext);
   return (
-    <>
+    <Router>
       <h1>Reddit App</h1>
-      <ThreadSelection />
-    </>
+      <Routes>
+        <Route path="/" element={<ThreadSelection />}>
+          <Route path=":threadId" element={<Posts />}></Route>
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

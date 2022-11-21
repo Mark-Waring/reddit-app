@@ -1,8 +1,17 @@
 import React from "react";
 
-const Post = ({ author, flair, time, body, score, replyNumber }) => {
+export default function Post({
+  title,
+  author,
+  flair,
+  time,
+  body,
+  score,
+  replyNumber,
+}) {
   return (
     <>
+      <h3>{title}</h3>
       <div>
         {author} {flair && "- "} {flair} - {time}
       </div>
@@ -14,6 +23,4 @@ const Post = ({ author, flair, time, body, score, replyNumber }) => {
       <div>{replyNumber === 1 ? " 1 reply" : ` ${replyNumber} replies`}</div>
     </>
   );
-};
-
-export default Post;
+}

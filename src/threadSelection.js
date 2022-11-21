@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "./AppContext";
 import SavedThreads from "./SavedThreads";
 import getThread from "./getThread";
@@ -36,41 +36,30 @@ const ThreadSelection = () => {
     }
     setSavedThreads([...savedThreads, { ...threadToSave }]);
     setPostData(null);
+    // eslint-disable-next-line
   }, [postData]);
 
   console.log(savedThreads);
 
   function replyData(base) {
-    return base?.map((post) => {
+    return base?.map((post, idx) => {
       const details = {
         author: post?.data.author,
         flair:
           post?.data.author_flair_richtext &&
           post?.data.author_flair_richtext[1]?.t,
-        time: post?.data.created_utc,
+        time: `${Math.floor((now - post?.data.created_utc) / 60)} minutes ago`,
         body: post?.data.body,
         score: post?.data.score,
         replyNumber: post?.data.replies?.data?.children?.length,
-        getReplies: replyData(post?.data?.replies?.data?.children),
+        id: idx,
+        getReplies: post?.data?.replies
+          ? replyData(post?.data?.replies?.data?.children)
+          : null,
       };
       return details;
     });
   }
-
-  //   const replies = replyBase.map((post) => {
-  //     return {
-  //       author: post?.data.author,
-  //       flair:
-  //         post?.data.author_flair_richtext &&
-  //         post?.data.author_flair_richtext[1]?.t,
-  //       time: post?.data.created_utc,
-  //       body: post?.data.body,
-  //       score: post?.data.score,
-  //       replyNumber: post?.data.replies?.data?.children?.length,
-  //       replies: post?.data?.replies?.data?.children,
-  //       getReplies: replyData(post?.data?.replies?.data?.children),
-  //     };
-  //   });
 
   const threadToSave = postData && {
     title: postData.title,
@@ -84,8 +73,6 @@ const ThreadSelection = () => {
     repliesArray: replyData(replyBase),
   };
 
-  console.log(threadToSave);
-
   return (
     <>
       <form>
@@ -98,13 +85,14 @@ const ThreadSelection = () => {
           onClick={(e) => {
             e.preventDefault();
             setUrl(threadInput);
+            setThreadInput("");
           }}
         >
           Select Thread
         </button>
       </form>
       {error && <h2>Something went wrong.</h2>}
-      {!error && <SavedThreads />}
+      <SavedThreads />
     </>
   );
 };
