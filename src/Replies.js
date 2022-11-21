@@ -4,6 +4,9 @@ export default function Replies({ repliesArray }) {
   return (
     <>
       {repliesArray?.map((post) => {
+        if (!post.author) {
+          return null;
+        }
         return (
           <>
             <div>
@@ -17,9 +20,9 @@ export default function Replies({ repliesArray }) {
             <div>
               {post.replyNumber === 1
                 ? " 1 reply"
-                : ` ${post.replyNumber} replies`}
+                : ` ${post.replyNumber ?? 0} replies`}
             </div>
-            <Replies repliesArray={post?.getReplies} />
+            {<Replies repliesArray={post?.getReplies} />}
           </>
         );
       })}
