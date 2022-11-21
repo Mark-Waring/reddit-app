@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 
 const Posts = () => {
   const msg = new SpeechSynthesisUtterance();
-  const [toRead, setToRead] = useState("");
   const { savedThreads } = useContext(AppContext);
   const [currentThread, setCurrentThread] = useState(null);
   const { threadId } = useParams();
@@ -36,6 +35,7 @@ const Posts = () => {
       {currentThread && (
         <div id="posts">
           <Post
+            className="Level 0"
             title={currentThread.title}
             author={currentThread.author}
             flair={currentThread.flair}
