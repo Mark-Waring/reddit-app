@@ -8,7 +8,7 @@ export default function Replies({ repliesArray }) {
           return null;
         }
         return (
-          <>
+          <div style={{ paddingLeft: `${post.level * 10}px` }}>
             <div>
               {post.author} {post.flair && "- "} {post.flair} - {post.time}
             </div>
@@ -22,8 +22,10 @@ export default function Replies({ repliesArray }) {
                 ? " 1 reply"
                 : ` ${post.replyNumber ?? 0} replies`}
             </div>
-            {<Replies repliesArray={post?.getReplies} />}
-          </>
+            <div>
+              <Replies repliesArray={post?.getReplies} />
+            </div>
+          </div>
         );
       })}
     </>

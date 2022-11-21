@@ -11,7 +11,7 @@ const ThreadSelection = () => {
   const now = Math.round(Date.now() / 1000);
   const { savedThreads, setSavedThreads } = useContext(AppContext);
   const [threadInput, setThreadInput] = useState("");
-  const { error } = useQuery(["getGifs", url], () => getThread(url), {
+  const { error } = useQuery(["getThreads", url], () => getThread(url), {
     onSuccess: (data) => {
       setPostData({
         author: data[0]?.data?.children[0].data?.author,
@@ -41,8 +41,11 @@ const ThreadSelection = () => {
 
   console.log(savedThreads);
 
+  let level = 0;
+
   function replyData(base) {
     return base?.map((post, idx) => {
+      level = level + 1;
       const details = {
         author: post?.data.author,
         flair:
@@ -53,10 +56,14 @@ const ThreadSelection = () => {
         score: post?.data.score,
         replyNumber: post?.data.replies?.data?.children?.length,
         id: idx,
+        level: level,
         getReplies: post?.data?.replies
           ? replyData(post?.data?.replies?.data?.children)
           : null,
       };
+      if (!post.getReplies) {
+        level = level - 1;
+      }
       return details;
     });
   }
@@ -72,6 +79,8 @@ const ThreadSelection = () => {
     replyNumber: postData.replyNumber ? postData?.replyNumber : "0",
     repliesArray: replyData(replyBase),
   };
+
+  console.log(threadToSave);
 
   return (
     <>
