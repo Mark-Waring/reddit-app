@@ -84,7 +84,7 @@ export default function ThreadAdd() {
     time: `${Math.floor((now - postData.time) / 60)} minutes ago`,
     body: postData.body,
     score: postData.score,
-    replyNumber: postData.replyNumber ? postData?.replyNumber : "0",
+    replyNumber: !postData.replyNumber ?? "0",
     repliesArray: replyData(replyBase),
     toRead: `${postData.title}. ${postData.author}, ${Math.floor(
       (now - postData.time) / 60
@@ -92,9 +92,6 @@ export default function ThreadAdd() {
       postData.score
     }.  ${postData.replyNumber} comment${postData.replyNumber !== 1 && "s"}.`,
   };
-
-  console.log(threadToSave);
-  console.log(`The total number of comments is ${manualReplyCount}`);
 
   return (
     <>
