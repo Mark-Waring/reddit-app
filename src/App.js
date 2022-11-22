@@ -1,16 +1,15 @@
 import "./index.css";
-import ThreadSelection from "./ThreadSelection";
+import ThreadAdd from "./ThreadAdd";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Posts from "./Posts";
+import ListenPage from "./ListenPage";
 
 function App() {
   return (
     <Router>
       <h1>Reddit App</h1>
       <Routes>
-        <Route path="/" element={<ThreadSelection />}>
-          <Route path=":threadId" element={<Posts />}></Route>
-        </Route>
+        <Route exact path="/" element={<ThreadAdd />} />
+        <Route path=":threadId" element={<ListenPage />} />
       </Routes>
     </Router>
   );

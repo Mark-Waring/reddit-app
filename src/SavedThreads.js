@@ -1,13 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { AppContext } from "./AppContext";
-import { useParams } from "react-router-dom";
 
-const SavedThreads = () => {
+export default function SavedThreads() {
   const { savedThreads } = useContext(AppContext);
-  const [currentThread, setCurrentThread] = useState({});
-  console.log("rendering");
-  const { threadId } = useParams();
 
   return (
     <>
@@ -20,9 +16,6 @@ const SavedThreads = () => {
           </>
         );
       })}
-      <Outlet />
     </>
   );
-};
-
-export default SavedThreads;
+}

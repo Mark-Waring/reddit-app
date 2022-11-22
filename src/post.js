@@ -13,14 +13,14 @@ export default function Post({
     <>
       <h3>{title}</h3>
       <div>
-        {author} {flair && "- "} {flair} - {time}
+        {author} {flair} {time}
       </div>
       <div>{body}</div>
       <div>
         {score > 0 && "+"}
         {score}
       </div>
-      <div>{replyNumber === 1 ? " 1 reply" : ` ${replyNumber} replies`}</div>
+      <div>{replyNumber === 1 ? " 1 comment" : ` ${replyNumber} comments`}</div>
     </>
   );
 }

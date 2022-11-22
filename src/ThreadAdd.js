@@ -4,7 +4,7 @@ import { AppContext } from "./AppContext";
 import SavedThreads from "./SavedThreads";
 import getThread from "./getThread";
 
-const ThreadSelection = () => {
+export default function ThreadAdd() {
   const [url, setUrl] = useState(null);
   const [postData, setPostData] = useState(null);
   const [replyBase, setReplyBase] = useState(null);
@@ -13,16 +13,19 @@ const ThreadSelection = () => {
   const [threadInput, setThreadInput] = useState("");
   const { error } = useQuery(["getThreads", url], () => getThread(url), {
     onSuccess: (data) => {
+      console.log(data);
+      const baseData = data[0]?.data?.children[0].data;
       setPostData({
-        author: data[0]?.data?.children[0].data?.author,
-        title: data[0]?.data?.children[0].data?.title,
-        id: data[0]?.data?.children[0].data?.id,
+        author: baseData?.author,
+        title: baseData?.title,
+        id: baseData?.id,
         flair:
-          data[0]?.data?.children[0].data?.author_flair_richtext &&
-          data[0]?.data?.children[0].data?.author_flair_richtext[1]?.t,
-        time: data[0]?.data?.children[0].data?.created_utc,
-        body: data[0]?.data?.children[0].data?.selftext,
-        score: data[0]?.data?.children[0].data?.score,
+          baseData?.author_flair_richtext &&
+          baseData?.author_flair_richtext[1]?.t,
+        time: baseData?.created_utc,
+        body: baseData?.selftext,
+        score: baseData?.score,
+        level: 0,
         replyNumber: data[0]?.data?.children[0].data?.num_comments,
       });
       setReplyBase(data[1]?.data?.children);
@@ -31,37 +34,42 @@ const ThreadSelection = () => {
   });
 
   useEffect(() => {
-    if (!postData) {
-      return;
-    }
-    setSavedThreads([...savedThreads, { ...threadToSave }]);
-    setPostData(null);
+    setSavedThreads([{ ...threadToSave }, ...savedThreads]);
     // eslint-disable-next-line
   }, [postData]);
 
-  console.log(savedThreads);
-
   let level = 0;
+  let manualReplyCount = 0;
 
   function replyData(base) {
     return base?.map((post, idx) => {
+      manualReplyCount++;
+      const baseData = post?.data;
       level = level + 1;
       const details = {
-        author: post?.data.author,
+        comment: manualReplyCount,
+        author: baseData.author,
         flair:
-          post?.data.author_flair_richtext &&
-          post?.data.author_flair_richtext[1]?.t,
-        time: `${Math.floor((now - post?.data.created_utc) / 60)} minutes ago`,
-        body: post?.data.body,
-        score: post?.data.score,
-        replyNumber: post?.data.replies?.data?.children?.length,
-        id: idx,
+          baseData.author_flair_richtext &&
+          baseData.author_flair_richtext[1]?.t,
+        time: `${Math.floor((now - baseData.created_utc) / 60)} minutes ago`,
+        body: baseData.body,
+        score: baseData.score,
+        replyNumber: baseData.replies?.data?.children?.length,
+        id: baseData.body,
         level: level,
-        getReplies: post?.data?.replies
-          ? replyData(post?.data?.replies?.data?.children)
+        toRead: `${baseData.author}, ${Math.floor(
+          (now - baseData.created_utc) / 60
+        )} minutes ago, ${baseData.body}, ${baseData.score > 0 ? "+" : ""}${
+          baseData.score
+        }, ${baseData.replies?.data?.children?.length ?? "No"} repl${
+          baseData.replies?.data?.children?.length !== 1 ? "ies" : "y"
+        }.`,
+        getNestedReplies: baseData?.replies
+          ? replyData(baseData?.replies?.data?.children)
           : null,
       };
-      if (!post.getReplies) {
+      if (!post.getNestedReplies) {
         level = level - 1;
       }
       return details;
@@ -78,9 +86,15 @@ const ThreadSelection = () => {
     score: postData.score,
     replyNumber: postData.replyNumber ? postData?.replyNumber : "0",
     repliesArray: replyData(replyBase),
+    toRead: `${postData.title}. ${postData.author}, ${Math.floor(
+      (now - postData.time) / 60
+    )} minutes ago, ${postData.body}. ${postData.score > 0 && "+"}${
+      postData.score
+    }.  ${postData.replyNumber} comment${postData.replyNumber !== 1 && "s"}.`,
   };
 
   console.log(threadToSave);
+  console.log(`The total number of comments is ${manualReplyCount}`);
 
   return (
     <>
@@ -97,13 +111,11 @@ const ThreadSelection = () => {
             setThreadInput("");
           }}
         >
-          Select Thread
+          Add Thread
         </button>
       </form>
       {error && <h2>Something went wrong.</h2>}
       <SavedThreads />
     </>
   );
-};
-
-export default ThreadSelection;
+}
