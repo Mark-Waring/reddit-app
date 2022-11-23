@@ -23,6 +23,7 @@ export default function ThreadAdd() {
           baseData?.author_flair_richtext &&
           baseData?.author_flair_richtext[1]?.t,
         time: baseData?.created_utc,
+        subreddit: baseData?.subreddit_name_prefixed,
         body: baseData?.selftext,
         score: baseData?.score,
         level: 0,
@@ -38,16 +39,10 @@ export default function ThreadAdd() {
     // eslint-disable-next-line
   }, [postData]);
 
-  let level = 0;
-  let manualReplyCount = 0;
-
-  function replyData(base) {
-    return base?.map((post, idx) => {
-      manualReplyCount++;
+  function getReplyData(base) {
+    return base?.map((post) => {
       const baseData = post?.data;
-      level = level + 1;
       const details = {
-        comment: manualReplyCount,
         author: baseData.author,
         flair:
           baseData.author_flair_richtext &&
@@ -56,8 +51,8 @@ export default function ThreadAdd() {
         body: baseData.body,
         score: baseData.score,
         replyNumber: baseData.replies?.data?.children?.length,
-        id: baseData.body,
-        level: level,
+        id: baseData.id,
+        level: baseData.depth + 1,
         toRead: `${baseData.author}, ${Math.floor(
           (now - baseData.created_utc) / 60
         )} minutes ago, ${baseData.body}, ${baseData.score > 0 ? "+" : ""}${
@@ -66,12 +61,9 @@ export default function ThreadAdd() {
           baseData.replies?.data?.children?.length !== 1 ? "ies" : "y"
         }.`,
         getNestedReplies: baseData?.replies
-          ? replyData(baseData?.replies?.data?.children)
+          ? getReplyData(baseData?.replies?.data?.children)
           : null,
       };
-      if (!post.getNestedReplies) {
-        level = level - 1;
-      }
       return details;
     });
   }
@@ -81,17 +73,20 @@ export default function ThreadAdd() {
     id: postData.id,
     author: postData.author,
     flair: postData.flair,
-    time: `${Math.floor((now - postData.time) / 60)} minutes ago`,
+    time: `${Math.floor((now - postData.time) / 60)}`,
     body: postData.body,
     score: postData.score,
-    replyNumber: !postData.replyNumber ?? "0",
-    repliesArray: replyData(replyBase),
+    subreddit: postData.subreddit,
+    replyNumber: postData.replyNumber ?? "0",
+    repliesArray: getReplyData(replyBase),
     toRead: `${postData.title}. ${postData.author}, ${Math.floor(
       (now - postData.time) / 60
     )} minutes ago, ${postData.body}. ${postData.score > 0 && "+"}${
       postData.score
     }.  ${postData.replyNumber} comment${postData.replyNumber !== 1 && "s"}.`,
   };
+
+  console.log(threadToSave);
 
   return (
     <>

@@ -5,9 +5,8 @@ export default function Thread({ currentThread }) {
   return (
     <>
       {currentThread && (
-        <div id="posts">
+        <div id="thread">
           <Post
-            className="Level 0"
             title={currentThread.title}
             author={currentThread.author}
             flair={currentThread.flair}
@@ -17,8 +16,12 @@ export default function Thread({ currentThread }) {
             replyNumber={
               currentThread.replyNumber ? currentThread?.replyNumber : 0
             }
+            subreddit={currentThread.subreddit}
           />
-          <Replies repliesArray={currentThread.repliesArray} />
+          <Replies
+            className="replies-container"
+            repliesArray={currentThread.repliesArray}
+          />
         </div>
       )}
     </>

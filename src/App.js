@@ -6,7 +6,7 @@ import ListenPage from "./ListenPage";
 function App() {
   return (
     <Router>
-      <h1>Reddit App</h1>
+      <h1>Read It</h1>
       <Routes>
         <Route exact path="/" element={<ThreadAdd />} />
         <Route path=":threadId" element={<ListenPage />} />
