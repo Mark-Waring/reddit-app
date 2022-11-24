@@ -29,7 +29,10 @@ export default function Replies({ repliesArray }) {
                     {post.author}
                     <div className="replies-details">{post.flair}</div>
                   </div>
-                  <div className="replies-details">{`↑ ${post.score}`}</div>
+                  <span class="replies-span">
+                    <div className="replies-details">{`↑ ${post.score}`}</div>
+                    <div className="replies-details">{post.time}</div>
+                  </span>
                   <div className="replies-body">{post.body}</div>
                 </div>
                 <hr />

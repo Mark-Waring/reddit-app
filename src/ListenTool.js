@@ -22,7 +22,7 @@ export default function ListenTool({ currentThread }) {
         if (!post || !post.author) {
           return "";
         }
-        return `${post?.toRead}. ${readReplies(post?.getReplies)}`;
+        return `${post.toRead}. ${readReplies(post?.getReplies)}`;
       })}`;
   }
 

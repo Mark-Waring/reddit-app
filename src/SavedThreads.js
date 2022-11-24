@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
 import { AppContext } from "./AppContext";
+import SavedThread from "./SavedThread";
 
 export default function SavedThreads() {
   const { savedThreads } = useContext(AppContext);
@@ -8,13 +8,7 @@ export default function SavedThreads() {
   return (
     <>
       {savedThreads?.map((thread) => {
-        return (
-          <>
-            <NavLink key={thread.id} to={thread.id}>
-              {thread.title}
-            </NavLink>
-          </>
-        );
+        return <SavedThread key={thread.id} thread={thread} />;
       })}
     </>
   );

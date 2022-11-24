@@ -14,7 +14,8 @@ code {
     monospace;
 }
 
-h1 {
+h1,
+.add-thread-form {
   display: flex;
   justify-content: center;
 }
@@ -35,4 +36,38 @@ h3 {
 .replies-details {
   font-size: smaller;
   color: grey
+}
+
+.saved-container {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 10px;
+  padding: 10%;
+  padding-top: 10px;
+}
+
+.saved-thread {
+  display: flex;
+}
+
+
+.saved-thread img {
+  max-height: 75px;
+  margin-left: 18px;
+
+}
+
+.saved-left-align {
+  margin-right: auto;
+}
+
+hr {
+  width: 100%
+}
+
+
+
+.replies-span {
+  display: flex;
+  justify-content: space-between;
 }
