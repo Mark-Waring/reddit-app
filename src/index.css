@@ -59,12 +59,38 @@ h3 {
 
 .saved-left-align {
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 hr {
   width: 100%
 }
 
+.saved-details {
+  margin-top: auto;
+  font-size: smaller;
+  color: grey
+}
+
+.radio-container {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-box {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+
+.details-right-align {
+  margin-left: auto;
+}
+
+.replies-author {
+  display: flex;
+}
 
 
 .replies-span {

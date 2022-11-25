@@ -1,4 +1,4 @@
-import Post from "./Post";
+import OriginalPost from "./OriginalPost";
 import Replies from "./Replies";
 
 export default function Thread({ currentThread }) {
@@ -6,7 +6,7 @@ export default function Thread({ currentThread }) {
     <>
       {currentThread && (
         <div id="thread">
-          <Post
+          <OriginalPost
             title={currentThread.title}
             author={currentThread.author}
             flair={currentThread.flair}
