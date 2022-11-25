@@ -14,16 +14,12 @@ export default function ListenTool({ currentThread }) {
   };
 
   function readReplies(thread) {
-    return `${thread
-      ?.sort((a, b) => {
-        return b.score - a.score;
-      })
-      .map((post) => {
-        if (!post || !post.author) {
-          return "";
-        }
-        return `${post.toRead}. ${readReplies(post?.getReplies)}`;
-      })}`;
+    return `${thread?.map((post) => {
+      if (!post || !post.author) {
+        return "";
+      }
+      return `${post.toRead}. ${readReplies(post?.getReplies)}`;
+    })}`;
   }
 
   return (
