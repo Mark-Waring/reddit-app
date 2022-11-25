@@ -143,10 +143,7 @@ export default function ThreadAdd() {
           Add Thread
         </button>
       </form>
-      <form
-        onChange={(e) => setSort(e.target.value)}
-        className="radio-container"
-      >
+      <form className="radio-container">
         {/* <legend>Sort by:</legend> */}
         Sort By:
         <div className="radio-box">
@@ -156,6 +153,7 @@ export default function ThreadAdd() {
             name="confidence"
             value="confidence"
             checked={sort === "confidence"}
+            onChange={(e) => setSort(e.target.value)}
           />
           <label htmlFor="confidence">Best</label>
         </div>
@@ -166,6 +164,7 @@ export default function ThreadAdd() {
             name="sort"
             value="top"
             checked={sort === "top"}
+            onChange={(e) => setSort(e.target.value)}
           />
           <label htmlFor="top">Top</label>
         </div>
@@ -176,6 +175,7 @@ export default function ThreadAdd() {
             name="sort"
             value="new"
             checked={sort === "new"}
+            onChange={(e) => setSort(e.target.value)}
           />
           <label htmlFor="new">New</label>
         </div>
@@ -186,6 +186,7 @@ export default function ThreadAdd() {
             name="controverssort"
             value="controversial"
             checked={sort === "controversial"}
+            onChange={(e) => setSort(e.target.value)}
           />
           <label htmlFor="controversial">Controversial</label>
         </div>
@@ -196,6 +197,7 @@ export default function ThreadAdd() {
             name="sort"
             value="old"
             checked={sort === "old"}
+            onChange={(e) => setSort(e.target.value)}
           />
           <label htmlFor="old">Old</label>
         </div>
@@ -206,6 +208,7 @@ export default function ThreadAdd() {
             name="sort"
             value="qa"
             checked={sort === "qa"}
+            onChange={(e) => setSort(e.target.value)}
           />
           <label htmlFor="qa">{`Q&A`}</label>
         </div>
