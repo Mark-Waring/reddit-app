@@ -34,16 +34,23 @@ export default function Replies({ repliesArray }) {
                       : { paddingLeft: "0px" }
                   }
                 >
-                  <div className="replies-author">
+                  <div className="replies-author" id="speak">
                     {post.author}
                     <div className="replies-details details-right-align">
                       {convertTime(post.time)}
                     </div>
                   </div>
                   <div className="replies-details">{post.flair}</div>
-                  <div className="replies-details">{`↑ ${post.score}`}</div>
+                  <div className="replies-details">
+                    {`↑ ${post.score}`}
+                    <div
+                      style={{ display: "none" }}
+                    >{`Score ${post.score}`}</div>
+                  </div>
                   <span className="replies-span"></span>
-                  <div className="replies-body">{post.body}</div>
+                  <div className="replies-body" id="speak">
+                    {post.body}
+                  </div>
                 </div>
                 <hr />
               </div>

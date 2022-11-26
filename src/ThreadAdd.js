@@ -113,14 +113,13 @@ export default function ThreadAdd() {
         }.  ${postData.replyNumber} comment${
           postData.replyNumber !== 1 && "s"
         }.`,
+        progress: 0,
       },
       ...savedThreads,
     ]);
     setPostData(null);
     // eslint-disable-next-line
   }, [headerImage]);
-
-  console.log("howmany rerenders");
 
   console.log(savedThreads);
 

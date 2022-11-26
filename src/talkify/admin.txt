@@ -1,4 +1,0 @@
-browserify main.js > dist/talkify.js
-browserify main.js | uglifyjs > dist/talkify.min.js
-npm pack (test locally)
-npm publish
