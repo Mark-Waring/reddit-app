@@ -11,7 +11,10 @@ export default function SavedThread({ thread }) {
           <div class="saved-details">
             <div class="saved-details-left">
               <div>{thread.subreddit}</div>
-              {`u/${thread.author}`} {convertTime(thread.time)}
+              <div className="saved-bottom">
+                <div className="saved-author">{`u/${thread.author}`}</div>
+                <div className="saved-time">{convertTime(thread.time)}</div>
+              </div>
             </div>
             <AudioBox />
           </div>
