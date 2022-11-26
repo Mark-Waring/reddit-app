@@ -18,11 +18,11 @@ export default function ListenTool({ currentThread }) {
     currentThread?.repliesArray
   )}`;
 
-  // useEffect(() => {
-  //   if (!currentThread) return;
-  //   currentThread.progress = prevProgress.current + progress;
-  //   // eslint-disable-next-line
-  // }, [progress]);
+  useEffect(() => {
+    if (!currentThread) return;
+    currentThread.progress = prevProgress.current + progress;
+    // eslint-disable-next-line
+  }, [progress]);
 
   const speechHandler = () => {
     const track = readIt?.slice(prevProgress.current, readIt.length);

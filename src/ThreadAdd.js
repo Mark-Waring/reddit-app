@@ -14,33 +14,29 @@ export default function ThreadAdd() {
   const now = Math.round(Date.now() / 1000);
   const { savedThreads, setSavedThreads } = useContext(AppContext);
   const [threadInput, setThreadInput] = useState("");
-  const { error } = useQuery(
-    [("getThread", url, sort)],
-    () => getThread(url, sort),
-    {
-      onSuccess: (data) => {
-        console.log(data);
-        const baseData = data[0]?.data?.children[0].data;
-        setPostData({
-          author: baseData?.author,
-          title: baseData?.title,
-          id: baseData?.id,
-          flair:
-            baseData?.author_flair_richtext &&
-            baseData?.author_flair_richtext[1]?.t,
-          time: Math.floor((now - baseData?.created_utc) / 60),
-          subreddit: baseData?.subreddit_name_prefixed,
-          body: baseData?.selftext,
-          bodyHtml: baseData?.selftext_html,
-          score: baseData?.score,
-          level: 0,
-          replyNumber: data[0]?.data?.children[0].data?.num_comments,
-        });
-        setReplyBase(data[1]?.data?.children);
-      },
-      enabled: !!url,
-    }
-  );
+  const { error } = useQuery([("getThread", url)], () => getThread(url, sort), {
+    onSuccess: (data) => {
+      console.log(data);
+      const baseData = data[0]?.data?.children[0].data;
+      setPostData({
+        author: baseData?.author,
+        title: baseData?.title,
+        id: baseData?.id,
+        flair:
+          baseData?.author_flair_richtext &&
+          baseData?.author_flair_richtext[1]?.t,
+        time: Math.floor((now - baseData?.created_utc) / 60),
+        subreddit: baseData?.subreddit_name_prefixed,
+        body: baseData?.selftext,
+        bodyHtml: baseData?.selftext_html,
+        score: baseData?.score,
+        level: 0,
+        replyNumber: data[0]?.data?.children[0].data?.num_comments,
+      });
+      setReplyBase(data[1]?.data?.children);
+    },
+    enabled: !!url,
+  });
 
   function getReplyData(base) {
     return base?.map((post) => {
@@ -77,6 +73,7 @@ export default function ThreadAdd() {
     () => getHeader(postData?.subreddit),
     {
       onSuccess: (data) => {
+        console.log("query running");
         setHeaderImage(
           data?.data?.community_icon
             ? data?.data?.community_icon?.split("?")[0]
@@ -119,7 +116,7 @@ export default function ThreadAdd() {
     ]);
     setPostData(null);
     // eslint-disable-next-line
-  }, [headerImage]);
+  }, [queryCompleted]);
 
   console.log(savedThreads);
 

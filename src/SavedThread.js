@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import AudioBox from "./AudioBox";
 import convertTime from "./convertTime";
 
 export default function SavedThread({ thread }) {
@@ -7,9 +8,12 @@ export default function SavedThread({ thread }) {
       <div className="saved-thread">
         <div className="saved-left-align">
           <NavLink to={thread.id}>{thread.title}</NavLink>
-          <div>{thread.subreddit}</div>
-          <div className="saved-details">
-            {`u/${thread.author}`} {convertTime(thread.time)}
+          <div class="saved-details">
+            <div class="saved-details-left">
+              <div>{thread.subreddit}</div>
+              {`u/${thread.author}`} {convertTime(thread.time)}
+            </div>
+            <AudioBox />
           </div>
         </div>
         <NavLink to={thread.id}>

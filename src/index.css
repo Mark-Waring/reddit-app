@@ -14,6 +14,22 @@ code {
     monospace;
 }
 
+.audio-container {
+  width: 35%;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar {
+  border: 1px solid grey;
+  border-radius: 4px;
+  width: -webkit-fill-available;
+  height: 5px;
+  align-self: center;
+  margin-left: 5px;
+}
+
 h1,
 .add-thread-form {
   display: flex;
@@ -41,8 +57,8 @@ h3 {
 .saved-container {
   display: flex;
   flex-flow: column wrap;
-  padding: 10px;
-  padding: 10%;
+  padding-left: 25%;
+  padding-right: 25%;
   padding-top: 10px;
 }
 
@@ -61,16 +77,30 @@ h3 {
   margin-right: auto;
   display: flex;
   flex-direction: column;
+  width: -webkit-fill-available;
 }
 
 hr {
   width: 100%
 }
 
-.saved-details {
-  margin-top: auto;
+.saved-details-left {
+  flex-direction: column;
+  justify-content: space-between;
   font-size: smaller;
-  color: grey
+  color: grey;
+  height: -webkit-fill-available;
+  display: flex;
+}
+
+.saved-details {
+  display: flex;
+  height: -webkit-fill-available
+}
+
+.left-bottom {
+  display: flex;
+  flex-direction: column;
 }
 
 .radio-container {
