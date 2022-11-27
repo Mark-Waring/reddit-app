@@ -2,9 +2,20 @@ import "./index.css";
 import ThreadAdd from "./ThreadAdd";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ListenPage from "./ListenPage";
-import GlobalAudio from "./GlobalAudio";
+import ListenTool from "./ListenTool.js";
+import { useContext, useRef, useEffect } from "react";
+import { AppContext } from "./AppContext";
 
 function App() {
+  const { audioIsPlaying, currentAudio, progress, prevProgress } =
+    useContext(AppContext);
+
+  useEffect(() => {
+    if (!currentAudio) return;
+    currentAudio.progress = prevProgress.current + progress;
+    // eslint-disable-next-line
+  }, [progress]);
+
   return (
     <Router>
       <div className="route-wrapper">
@@ -13,7 +24,7 @@ function App() {
           <Route exact path="/" element={<ThreadAdd />} />
           <Route path=":threadId" element={<ListenPage />} />
         </Routes>
-        <GlobalAudio />
+        {audioIsPlaying && <ListenTool />}
       </div>
     </Router>
   );

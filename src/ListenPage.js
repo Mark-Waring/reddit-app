@@ -9,7 +9,7 @@ export default function ListenPage() {
   return (
     <>
       {/* <GlobalAudio thread={currentThread} /> */}
-      <Thread currentThread={currentThread} />
+      {/* <Thread currentThread={currentThread} /> */}
     </>
   );
 }
