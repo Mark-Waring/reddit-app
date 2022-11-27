@@ -12,6 +12,7 @@ export default function useHandleSpeak() {
   } = useContext(AppContext);
 
   function handleSpeak() {
+    window.speechSynthesis.cancel();
     prevProgress.current = currentAudio.progress;
     const track = readIt(currentAudio)?.slice(
       prevProgress.current,

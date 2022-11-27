@@ -72,18 +72,20 @@ code {
   margin-left: 5px;
 }
 
-.thread-progress {
+.thread-progress,
+.progress {
   background-color: black;
 }
 
 
+
+
 .global-player-container {
   display: flex;
-  height: 20%;
+  height: 15%;
   width: 100%;
   justify-content: center;
-  align-items: flex-end;
-  top: 80vh;
+  top: 85vh;
   position: fixed;
 }
 
@@ -96,14 +98,13 @@ code {
 
 .global-player {
   display: flex;
-  /* justify-content: center; */
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   background-color: lightgrey;
   margin-top: auto;
-  margin-bottom: 20px;
-  border-radius: 20px;
 }
+
+
 
 .global-audio-details {
   display: flex;
@@ -148,8 +149,8 @@ code {
 .op-comments-container {
   width: 25%;
   display: flex;
-  justify-content: end;
-  align-self: end;
+  justify-content: flex-end;
+  align-self: flex-end;
 }
 
 .thread-play {

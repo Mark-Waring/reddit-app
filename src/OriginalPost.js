@@ -29,6 +29,7 @@ export default function OriginalPost({
 
   console.log(prevProgress.current);
   console.log(readIt(currentThread));
+  const listening = currentAudio === currentThread;
 
   useEffect(() => {
     if (!currentAudio || isPaused) {
@@ -46,18 +47,18 @@ export default function OriginalPost({
         <h3 className="op-title">{title}</h3>
         <div class="thread-play-container">
           <div className="thread-play">
-            {(!audioIsPlaying || isPaused) && (
+            {(!listening || !audioIsPlaying || isPaused) && (
               <img
                 src={playButton}
                 alt={"play button"}
                 onClick={async () => {
-                  if (currentAudio === currentThread) {
+                  if (listening) {
                     handleSpeak();
                   } else await setCurrentAudio(currentThread);
                 }}
               />
             )}
-            {audioIsPlaying && !isPaused && (
+            {listening && audioIsPlaying && !isPaused && (
               <img
                 src={pauseButton}
                 alt={"pause button"}

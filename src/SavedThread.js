@@ -13,6 +13,7 @@ export default function SavedThread({ thread }) {
 
   const [handleSpeak] = useHandleSpeak();
   const [handlePause] = useHandlePause();
+  const listening = currentAudio === thread;
 
   useEffect(() => {
     if (!currentAudio || isPaused) {
@@ -60,19 +61,19 @@ export default function SavedThread({ thread }) {
             />
           </NavLink>
           <div className="thread-audio">
-            {(!audioIsPlaying || isPaused) && (
+            {(!listening || !audioIsPlaying || isPaused) && (
               <img
                 className="thread-audio-button"
                 src={playButton}
                 alt={"play button"}
                 onClick={async () => {
-                  if (currentAudio === thread) {
+                  if (listening) {
                     handleSpeak();
                   } else await setCurrentAudio(thread);
                 }}
               />
             )}
-            {audioIsPlaying && !isPaused && (
+            {listening && audioIsPlaying && !isPaused && (
               <img
                 className="thread-audio-button"
                 src={pauseButton}
