@@ -1,8 +1,10 @@
-import { useContext, useRef, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import convertTime from "./convertTime";
 import { AppContext } from "./AppContext";
 import playButton from "./audio-icons/play.png";
 import pauseButton from "./audio-icons/pause.png";
+import useHandleSpeak from "./useHandleSpeak.js";
+import useHandlePause from "./useHandlePause.js";
 
 export default function OriginalPost({
   title,
@@ -19,49 +21,24 @@ export default function OriginalPost({
     setCurrentAudio,
     audioIsPlaying,
     isPaused,
-    setAudioIsPlaying,
-    setIsPaused,
     readIt,
-    progress,
-    setProgress,
+    prevProgress,
   } = useContext(AppContext);
-  const prevProgress = useRef(currentThread?.progress ?? 0);
-  const [disabled, setDisabled] = useState(false);
+  const [handleSpeak] = useHandleSpeak();
+  const [handlePause] = useHandlePause();
 
-  // useEffect(() => {
-  //   if (!currentAudio) return;
-  //   currentAudio.progress = prevProgress.current + progress;
-  //   // eslint-disable-next-line
-  // }, [progress]);
-
-  function handleSpeak() {
-    setCurrentAudio(currentThread);
-    const track = readIt(currentThread)?.slice(
-      prevProgress.current,
-      readIt(currentThread).length
-    );
-    const utterance = new SpeechSynthesisUtterance(track);
-    const synth = window.speechSynthesis;
-    setAudioIsPlaying(true);
-    setIsPaused(false);
-    utterance.addEventListener("start", () => setDisabled(true));
-    utterance.addEventListener("end", () => setDisabled(false));
-    utterance.addEventListener("boundary", ({ charIndex }) => {
-      setProgress(charIndex);
-    });
-    synth.speak(utterance);
-  }
-
-  console.log(currentAudio.progress);
   console.log(prevProgress.current);
+  console.log(readIt(currentThread));
 
-  function handlePause() {
-    setIsPaused(true);
-    window.speechSynthesis.cancel();
-    if (!progress) return (prevProgress.current = currentThread.progress);
-    currentThread.progress = prevProgress.current + progress;
-    prevProgress.current = currentThread.progress;
-  }
+  useEffect(() => {
+    if (!currentAudio || isPaused) {
+      return;
+    }
+    if (currentAudio) {
+      handleSpeak();
+    }
+    // eslint-disable-next-line
+  }, [currentAudio]);
 
   return (
     <div className="original-post">
@@ -70,10 +47,22 @@ export default function OriginalPost({
         <div class="thread-play-container">
           <div className="thread-play">
             {(!audioIsPlaying || isPaused) && (
-              <img src={playButton} onClick={handleSpeak} />
+              <img
+                src={playButton}
+                alt={"play button"}
+                onClick={async () => {
+                  if (currentAudio === currentThread) {
+                    handleSpeak();
+                  } else await setCurrentAudio(currentThread);
+                }}
+              />
             )}
             {audioIsPlaying && !isPaused && (
-              <img src={pauseButton} onClick={handlePause} />
+              <img
+                src={pauseButton}
+                alt={"pause button"}
+                onClick={() => handlePause()}
+              />
             )}
           </div>
         </div>

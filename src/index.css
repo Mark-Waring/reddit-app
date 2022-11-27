@@ -45,6 +45,15 @@ code {
   margin-left: 5px;
 }
 
+.thread-progress-bar {
+  display: flex;
+  border: 1px solid grey;
+  border-radius: 4px;
+  width: 70%;
+  height: 5px;
+  align-self: center;
+}
+
 .progress-bar-global {
   display: flex;
   border: 1px solid grey;
@@ -55,7 +64,7 @@ code {
   margin-left: 5px;
 }
 
-.progress {
+.thread-progress {
   background-color: black;
 }
 
@@ -154,6 +163,27 @@ code {
   font-weight: bold;
 }
 
+.subreddit-header {
+  max-height: 75px;
+}
+
+.thread-audio-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+}
+
+.thread-audio {
+  display: flex;
+  height: 25%;
+  width: 10%;
+}
+
+.thread-audio-button {
+  width: 100%
+}
+
 .audio-control-container {
   display: flex;
   justify-content: space-around;
@@ -225,7 +255,7 @@ h1,
 
 .saved-thread img {
   max-height: 75px;
-  margin-left: 18px;
+  margin-left: 5px;
 
 }
 

@@ -1,9 +1,10 @@
 import "./index.css";
 import ThreadAdd from "./ThreadAdd";
+import Thread from "./Thread";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ListenPage from "./ListenPage";
-import ListenTool from "./ListenTool.js";
-import { useContext, useRef, useEffect } from "react";
+
+import GlobalAudioPlayer from "./GlobalAudioPlayer.js";
+import { useContext, useEffect } from "react";
 import { AppContext } from "./AppContext";
 
 function App() {
@@ -22,9 +23,9 @@ function App() {
         <h1>Read It</h1>
         <Routes>
           <Route exact path="/" element={<ThreadAdd />} />
-          <Route path=":threadId" element={<ListenPage />} />
+          <Route path=":threadId" element={<Thread />} />
         </Routes>
-        {audioIsPlaying && <ListenTool />}
+        {audioIsPlaying && <GlobalAudioPlayer />}
       </div>
     </Router>
   );

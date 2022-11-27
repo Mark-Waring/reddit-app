@@ -1,18 +1,16 @@
 import { useState, createContext, useRef } from "react";
-import { useParams } from "react-router-dom";
 import convertTime from "./convertTime";
 export const AppContext = createContext();
 
 export function AppProvider(props) {
-  const { threadId } = useParams();
   const [savedThreads, setSavedThreads] = useState([]);
   const [searchUrl, setSearchUrl] = useState("");
   const [sort, setSort] = useState("confidence");
-  const [currentAudio, setCurrentAudio] = useState({});
+  const [currentAudio, setCurrentAudio] = useState(null);
   const [audioIsPlaying, setAudioIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
-  const prevProgress = useRef(currentAudio?.progress ?? 0);
+  const prevProgress = useRef(0);
 
   function readReplies(replies) {
     if (!replies) return "";
