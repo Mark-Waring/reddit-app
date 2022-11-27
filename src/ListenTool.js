@@ -6,17 +6,20 @@ export default function ListenTool({ currentThread }) {
   const prevProgress = useRef(currentThread?.progress ?? 0);
 
   function readReplies(thread) {
+    if (!thread) return "";
     return `${thread?.map((post) => {
       if (!post || !post.author) {
         return "";
       }
-      return `${post.toRead}. ${readReplies(post?.getReplies)}`;
+      return `${post.toRead}. ${readReplies(post?.getNestedReplies)}`;
     })}`;
   }
 
   const readIt = `${currentThread?.toRead} ${readReplies(
     currentThread?.repliesArray
   )}`;
+
+  console.log(readIt);
 
   useEffect(() => {
     if (!currentThread) return;

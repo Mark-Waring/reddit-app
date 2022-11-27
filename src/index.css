@@ -121,6 +121,10 @@ h1,
   justify-content: center;
 }
 
+.thread {
+  margin: 10px
+}
+
 h3 {
   display: flex;
   justify-content: space-between;

@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "./AppContext";
 import SavedThreads from "./SavedThreads";
 import getThread, { getHeader } from "./getThread";
+import convertTime from "./convertTime";
 
 export default function ThreadAdd() {
   const [url, setUrl] = useState(null);
@@ -53,13 +54,13 @@ export default function ThreadAdd() {
         replyNumber: baseData.replies?.data?.children?.length,
         id: baseData.id,
         level: baseData.depth + 1,
-        toRead: `${baseData.author}, ${Math.floor(
-          (now - baseData.created_utc) / 60
-        )} minutes ago, ${baseData.body}, ${baseData.score > 0 ? "+" : ""}${
-          baseData.score
-        }, ${baseData.replies?.data?.children?.length ?? "No"} repl${
+        toRead: `${baseData.author}, ${convertTime(baseData.time)}, ${
+          baseData.body
+        }, ${baseData.score > 0 ? "+" : ""}${baseData.score}, ${
+          baseData.replies?.data?.children?.length ?? "No"
+        } repl${
           baseData.replies?.data?.children?.length !== 1 ? "ies" : "y"
-        }.`,
+        }, `,
         getNestedReplies: baseData?.replies
           ? getReplyData(baseData?.replies?.data?.children)
           : null,
@@ -103,13 +104,11 @@ export default function ThreadAdd() {
         header: headerImage,
         replyNumber: postData.replyNumber ?? "0",
         repliesArray: getReplyData(replyBase),
-        toRead: `${postData.title}. ${postData.author}, ${Math.floor(
-          (now - postData.time) / 60
-        )} minutes ago, ${postData.body}. ${postData.score > 0 && "+"}${
-          postData.score
-        }.  ${postData.replyNumber} comment${
-          postData.replyNumber !== 1 && "s"
-        }.`,
+        toRead: `${postData.title}, ${postData.author}, ${convertTime(
+          postData.time
+        )}, ${postData.body}, Score ${postData.score}.  ${
+          postData.replyNumber
+        } comment${postData.replyNumber !== 1 && "s"}.`,
         progress: 0,
       },
       ...savedThreads,

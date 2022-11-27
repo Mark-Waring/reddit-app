@@ -5,7 +5,7 @@ export default function Thread({ currentThread }) {
   return (
     <>
       {currentThread && (
-        <div id="thread">
+        <div className="thread">
           <OriginalPost
             title={currentThread.title}
             author={currentThread.author}
