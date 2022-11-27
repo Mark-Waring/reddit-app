@@ -54,6 +54,14 @@ code {
   align-self: center;
 }
 
+.saved-right-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
 .progress-bar-global {
   display: flex;
   border: 1px solid grey;
@@ -175,9 +183,8 @@ code {
 }
 
 .thread-audio {
-  display: flex;
-  height: 25%;
-  width: 10%;
+  width: 30%;
+  padding-top: 25%;
 }
 
 .thread-audio-button {

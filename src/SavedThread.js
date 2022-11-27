@@ -38,28 +38,6 @@ export default function SavedThread({ thread }) {
               </div>
             </div>
             <div className="thread-audio-container">
-              <div className="thread-audio">
-                {(!audioIsPlaying || isPaused) && (
-                  <img
-                    className="thread-audio-button"
-                    src={playButton}
-                    alt={"play button"}
-                    onClick={async () => {
-                      if (currentAudio === thread) {
-                        handleSpeak();
-                      } else await setCurrentAudio(thread);
-                    }}
-                  />
-                )}
-                {audioIsPlaying && !isPaused && (
-                  <img
-                    className="thread-audio-button"
-                    src={pauseButton}
-                    alt={"pause button"}
-                    onClick={() => handlePause()}
-                  />
-                )}
-              </div>
               <div className="thread-progress-bar" style={{ display: "flex" }}>
                 <div
                   className="thread-progress"
@@ -73,13 +51,37 @@ export default function SavedThread({ thread }) {
             </div>
           </div>
         </div>
-        <NavLink to={thread.id}>
-          <img
-            className="subreddit-header"
-            src={thread.header}
-            alt={`${thread.subreddit} Community Icon`}
-          />
-        </NavLink>
+        <div className="saved-right-align">
+          <NavLink to={thread.id}>
+            <img
+              className="subreddit-header"
+              src={thread.header}
+              alt={`${thread.subreddit} Community Icon`}
+            />
+          </NavLink>
+          <div className="thread-audio">
+            {(!audioIsPlaying || isPaused) && (
+              <img
+                className="thread-audio-button"
+                src={playButton}
+                alt={"play button"}
+                onClick={async () => {
+                  if (currentAudio === thread) {
+                    handleSpeak();
+                  } else await setCurrentAudio(thread);
+                }}
+              />
+            )}
+            {audioIsPlaying && !isPaused && (
+              <img
+                className="thread-audio-button"
+                src={pauseButton}
+                alt={"pause button"}
+                onClick={() => handlePause()}
+              />
+            )}
+          </div>
+        </div>
       </div>
       <hr />
     </>
