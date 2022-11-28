@@ -104,11 +104,6 @@ export default function ThreadAdd() {
         header: headerImage,
         replyNumber: postData.replyNumber ?? "0",
         repliesArray: getReplyData(replyBase),
-        toRead: `${postData.title}, ${postData.author}, ${convertTime(
-          postData.time
-        )}, ${postData.body}, Score ${postData.score}.  ${
-          postData.replyNumber
-        } comment${postData.replyNumber !== 1 && "s"}.`,
         progress: 0,
       },
       ...savedThreads,
@@ -117,10 +112,9 @@ export default function ThreadAdd() {
     // eslint-disable-next-line
   }, [queryCompleted]);
 
-  console.log(savedThreads);
-
   return (
     <>
+      <h1>Read It</h1>
       <form className="add-thread-form">
         <input
           type="text"

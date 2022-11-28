@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import convertTime from "./convertTime";
 import { AppContext } from "./AppContext";
-import playButton from "./audio-icons/play.png";
-import pauseButton from "./audio-icons/pause.png";
-import useHandleSpeak from "./useHandleSpeak.js";
-import useHandlePause from "./useHandlePause.js";
+import playButton from "./audio-icons/play-black.png";
+import pauseButton from "./audio-icons/pause-black.png";
+import useHandleSpeak from "./audio-functions/useHandleSpeak.js";
+import useHandlePause from "./audio-functions/useHandlePause.js";
 
 export default function OriginalPost({
   title,
@@ -27,8 +27,6 @@ export default function OriginalPost({
   const [handleSpeak] = useHandleSpeak();
   const [handlePause] = useHandlePause();
 
-  console.log(prevProgress.current);
-  console.log(readIt(currentThread));
   const listening = currentAudio === currentThread;
 
   useEffect(() => {
@@ -40,6 +38,8 @@ export default function OriginalPost({
     }
     // eslint-disable-next-line
   }, [currentAudio]);
+
+  console.log(currentAudio);
 
   return (
     <div className="original-post">

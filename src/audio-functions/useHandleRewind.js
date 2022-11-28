@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../AppContext";
 
-export default function useHandleFwd() {
+export default function useHandleRewind() {
   const { readIt, prevProgress, currentAudio, setProgress, progress } =
     useContext(AppContext);
 
-  function handleFwd() {
+  function handleRewind() {
     window.speechSynthesis.cancel();
-    currentAudio.progress = prevProgress.current + progress + 60;
+    currentAudio.progress = prevProgress.current + progress - 60;
     prevProgress.current = currentAudio.progress;
     const track = readIt(currentAudio)?.slice(
       prevProgress.current,
@@ -24,5 +24,5 @@ export default function useHandleFwd() {
     });
     synth.speak(utterance);
   }
-  return [handleFwd];
+  return [handleRewind];
 }

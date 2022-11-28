@@ -2,28 +2,31 @@ import { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import convertTime from "./convertTime";
-import playButton from "./audio-icons/play.png";
-import pauseButton from "./audio-icons/pause.png";
-import useHandleSpeak from "./useHandleSpeak.js";
-import useHandlePause from "./useHandlePause.js";
+import playButton from "./audio-icons/play-black.png";
+import pauseButton from "./audio-icons/pause-black.png";
+import useHandleSpeak from "./audio-functions/useHandleSpeak.js";
+import useHandlePause from "./audio-functions/useHandlePause.js";
 
 export default function SavedThread({ thread }) {
-  const { audioIsPlaying, isPaused, currentAudio, setCurrentAudio, readIt } =
-    useContext(AppContext);
+  const {
+    audioIsPlaying,
+    isPaused,
+    setIsPaused,
+    currentAudio,
+    setCurrentAudio,
+    readIt,
+  } = useContext(AppContext);
 
   const [handleSpeak] = useHandleSpeak();
   const [handlePause] = useHandlePause();
   const listening = currentAudio === thread;
 
   useEffect(() => {
-    if (!currentAudio || isPaused) {
-      return;
-    }
-    if (currentAudio) {
+    if (listening && !isPaused) {
       handleSpeak();
     }
     // eslint-disable-next-line
-  }, [currentAudio]);
+  }, [audioIsPlaying, isPaused]);
 
   return (
     <>
@@ -67,9 +70,8 @@ export default function SavedThread({ thread }) {
                 src={playButton}
                 alt={"play button"}
                 onClick={async () => {
-                  if (listening) {
-                    handleSpeak();
-                  } else await setCurrentAudio(thread);
+                  await setCurrentAudio(thread);
+                  await setIsPaused(false);
                 }}
               />
             )}

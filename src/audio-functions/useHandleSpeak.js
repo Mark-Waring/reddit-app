@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../AppContext";
 
 export default function useHandleSpeak() {
   const {
@@ -9,10 +9,13 @@ export default function useHandleSpeak() {
     setAudioIsPlaying,
     setProgress,
     setIsPaused,
+    isPaused,
   } = useContext(AppContext);
 
   function handleSpeak() {
-    window.speechSynthesis.cancel();
+    if (!isPaused) {
+      window.speechSynthesis.cancel();
+    }
     prevProgress.current = currentAudio.progress;
     const track = readIt(currentAudio)?.slice(
       prevProgress.current,

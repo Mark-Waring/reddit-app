@@ -21,7 +21,7 @@ export default function Thread() {
   console.log(currentThread);
 
   return (
-    <>
+    <div className="thread-container">
       {currentThread && (
         <div className="thread">
           <OriginalPost
@@ -44,6 +44,6 @@ export default function Thread() {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }

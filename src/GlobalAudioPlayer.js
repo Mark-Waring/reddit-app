@@ -4,10 +4,10 @@ import backButton from "./audio-icons/back.png";
 import playButton from "./audio-icons/play.png";
 import pauseButton from "./audio-icons/pause.png";
 import fwdButton from "./audio-icons/fwd.png";
-import useHandleSpeak from "./useHandleSpeak.js";
-import useHandlePause from "./useHandlePause.js";
-import useHandleRewind from "./useHandleRewind";
-import useHandleFwd from "./useHandleFwd";
+import useHandleSpeak from "./audio-functions/useHandleSpeak.js";
+import useHandlePause from "./audio-functions/useHandlePause.js";
+import useHandleRewind from "./audio-functions/useHandleRewind";
+import useHandleFwd from "./audio-functions/useHandleFwd";
 
 export default function GlobalAudioPlayer() {
   const { audioIsPlaying, isPaused, readIt, currentAudio } =
@@ -27,7 +27,11 @@ export default function GlobalAudioPlayer() {
       >
         <div className="global-player">
           <div className="global-audio-details">
-            <div className="global-audio-title">{currentAudio?.title}</div>
+            <div className="global-audio-title">
+              {currentAudio?.title.length < 50
+                ? currentAudio.title
+                : `${currentAudio.title.substring(0, 50)}...`}
+            </div>
             <div className="progress-bar-global" style={{ display: "flex" }}>
               <div
                 className="progress"

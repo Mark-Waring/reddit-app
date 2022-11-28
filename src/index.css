@@ -12,6 +12,11 @@ body {
   word-wrap: break-word;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 .route-wrapper {
   width: 100%;
   height: 100vh;
@@ -70,13 +75,16 @@ code {
   height: 5px;
   align-self: center;
   margin-left: 5px;
+  background-color: darkgrey;
 }
 
-.thread-progress,
-.progress {
+.thread-progress {
   background-color: black;
 }
 
+.progress {
+  background-color: white;
+}
 
 
 
@@ -100,7 +108,7 @@ code {
   display: flex;
   width: 100%;
   height: 100%;
-  background-color: lightgrey;
+  background-color: dimgrey;
   margin-top: auto;
 }
 
@@ -115,7 +123,8 @@ code {
 }
 
 .global-audio-title {
-  font-size: 15px
+  font-size: 15px;
+  color: white;
 }
 
 .op-details-left {
@@ -140,6 +149,7 @@ code {
 
 .op-title-span {
   display: flex;
+  margin-top: 0px;
 }
 
 .op-title {
@@ -231,7 +241,15 @@ h1,
 }
 
 .thread {
+  display: flex;
+  flex-direction: column;
   margin: 10px
+}
+
+.thread-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%
 }
 
 .replies-border {
@@ -247,7 +265,19 @@ h1,
   color: grey
 }
 
+.login-form,
+.login-container {
+  display: flex;
+}
 
+.login-container,
+.login-form {
+  justify-content: center;
+}
+
+.login-form .login-container {
+  flex-flow: column wrap;
+}
 
 .saved-container {
   display: flex;

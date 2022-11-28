@@ -17,10 +17,11 @@ function App() {
     // eslint-disable-next-line
   }, [progress]);
 
+  console.log(currentAudio?.title.length);
+
   return (
     <Router>
       <div className="route-wrapper">
-        <h1>Read It</h1>
         <Routes>
           <Route exact path="/" element={<ThreadAdd />} />
           <Route path=":threadId" element={<Thread />} />
