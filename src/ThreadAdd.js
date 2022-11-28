@@ -112,6 +112,15 @@ export default function ThreadAdd() {
     // eslint-disable-next-line
   }, [queryCompleted]);
 
+  const sortOptions = [
+    { val: "confidence", display: "Best" },
+    { val: "top", display: "Top" },
+    { val: "new", display: "New" },
+    { val: "controversial", display: "Controversial" },
+    { val: "old", display: "Old" },
+    { val: "qa", display: "Q&A" },
+  ];
+
   return (
     <>
       <h1>Read It</h1>
@@ -132,76 +141,24 @@ export default function ThreadAdd() {
           Add Thread
         </button>
       </form>
-      <form className="radio-container">
-        {/* <legend>Sort by:</legend> */}
-        Sort By:
-        <div className="radio-box">
-          <input
-            type="radio"
-            id="confidence"
-            name="confidence"
-            value="confidence"
-            checked={sort === "confidence"}
-            onChange={(e) => setSort(e.target.value)}
-          />
-          <label htmlFor="confidence">Best</label>
-        </div>
-        <div className="radio-box">
-          <input
-            type="radio"
-            id="top"
-            name="sort"
-            value="top"
-            checked={sort === "top"}
-            onChange={(e) => setSort(e.target.value)}
-          />
-          <label htmlFor="top">Top</label>
-        </div>
-        <div className="radio-box">
-          <input
-            type="radio"
-            id="new"
-            name="sort"
-            value="new"
-            checked={sort === "new"}
-            onChange={(e) => setSort(e.target.value)}
-          />
-          <label htmlFor="new">New</label>
-        </div>
-        <div className="radio-box">
-          <input
-            type="radio"
-            id="controversial"
-            name="controverssort"
-            value="controversial"
-            checked={sort === "controversial"}
-            onChange={(e) => setSort(e.target.value)}
-          />
-          <label htmlFor="controversial">Controversial</label>
-        </div>
-        <div className="radio-box">
-          <input
-            type="radio"
-            id="old"
-            name="sort"
-            value="old"
-            checked={sort === "old"}
-            onChange={(e) => setSort(e.target.value)}
-          />
-          <label htmlFor="old">Old</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="qa"
-            name="sort"
-            value="qa"
-            checked={sort === "qa"}
-            onChange={(e) => setSort(e.target.value)}
-          />
-          <label htmlFor="qa">{`Q&A`}</label>
-        </div>
-      </form>
+      <div className="sort-container">
+        <label htmlFor="sort">Sort by: </label>
+        <select
+          id="sort"
+          name="sort"
+          style={{ width: "40%", textAlign: "center" }}
+          value={sort}
+          onChange={(e) => {
+            setSort(e.target.value);
+          }}
+        >
+          {sortOptions.map((val) => (
+            <option key={val.val} value={val.val}>
+              {val.display}
+            </option>
+          ))}
+        </select>
+      </div>
       {(error || headerError) && <h2>Something went wrong.</h2>}
       <div className="saved-container">
         <SavedThreads />
