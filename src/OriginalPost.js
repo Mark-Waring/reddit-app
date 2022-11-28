@@ -16,14 +16,8 @@ export default function OriginalPost({
   subreddit,
   currentThread,
 }) {
-  const {
-    currentAudio,
-    setCurrentAudio,
-    audioIsPlaying,
-    isPaused,
-    readIt,
-    prevProgress,
-  } = useContext(AppContext);
+  const { currentAudio, setCurrentAudio, audioIsPlaying, isPaused } =
+    useContext(AppContext);
   const [handleSpeak] = useHandleSpeak();
   const [handlePause] = useHandlePause();
 
