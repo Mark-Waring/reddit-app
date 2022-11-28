@@ -1,12 +1,13 @@
-export default function GlobalAudio({ thread, global }) {
+export default function GlobalAudio({ thread }) {
   return (
-    <div
-      className="global-player-container"
-      style={{ position: `${global === "global" ? "fixed" : ""}` }}
-    >
+    <div className="global-player-container">
       <div className="global-player">
         <div className="global-audio-details">
-          <div className="global-audio-title">{thread?.title}</div>
+          <div className="global-audio-title">
+            {thread?.title.length < 60
+              ? thread.title
+              : `${thread?.title.substring(0, 59)}...`}
+          </div>
           <div className="progress-bar-global" style={{ display: "flex" }}>
             <div
               className="progress"
