@@ -26,7 +26,7 @@ export default function SavedThread({ thread }) {
       handleSpeak();
     }
     // eslint-disable-next-line
-  }, [audioIsPlaying, isPaused]);
+  }, [isPaused, currentAudio]);
 
   return (
     <>
@@ -70,8 +70,8 @@ export default function SavedThread({ thread }) {
                 src={playButton}
                 alt={"play button"}
                 onClick={async () => {
-                  await setCurrentAudio(thread);
                   await setIsPaused(false);
+                  await setCurrentAudio(thread);
                 }}
               />
             )}

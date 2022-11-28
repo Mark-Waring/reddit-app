@@ -59,6 +59,11 @@ code {
   align-self: center;
 }
 
+.progress,
+.thread-progress {
+  border-radius: 4px;
+}
+
 .saved-right-align {
   display: flex;
   flex-direction: column;
