@@ -4,6 +4,7 @@ import { AppContext } from "./AppContext";
 import SavedThreads from "./SavedThreads";
 import getThread, { getHeader } from "./getThread";
 import convertTime from "./convertTime";
+import Form from "react-bootstrap/Form";
 
 export default function ThreadAdd() {
   const [url, setUrl] = useState(null);
@@ -15,6 +16,7 @@ export default function ThreadAdd() {
   const now = Math.round(Date.now() / 1000);
   const { savedThreads, setSavedThreads } = useContext(AppContext);
   const [threadInput, setThreadInput] = useState("");
+
   const { error } = useQuery([("getThread", url)], () => getThread(url, sort), {
     onSuccess: (data) => {
       console.log(data);
@@ -98,7 +100,6 @@ export default function ThreadAdd() {
         flair: postData.flair,
         time: postData.time,
         body: postData.body,
-        bodyHtml: postData.bodyHtml,
         score: postData.score,
         subreddit: postData.subreddit,
         header: headerImage,
@@ -112,25 +113,18 @@ export default function ThreadAdd() {
     // eslint-disable-next-line
   }, [queryCompleted]);
 
-  const sortOptions = [
-    { val: "confidence", display: "Best" },
-    { val: "top", display: "Top" },
-    { val: "new", display: "New" },
-    { val: "controversial", display: "Controversial" },
-    { val: "old", display: "Old" },
-    { val: "qa", display: "Q&A" },
-  ];
-
   return (
     <>
       <h1>Read It</h1>
       <form className="add-thread-form">
         <input
+          className="add-thread-item add-thread-input"
           type="text"
           value={threadInput || ""}
           onChange={(e) => setThreadInput(e.target.value)}
         />
         <button
+          className="add-thread-item add-thread-button"
           onClick={(e) => {
             e.preventDefault();
             setUrl(threadInput);
@@ -142,22 +136,36 @@ export default function ThreadAdd() {
         </button>
       </form>
       <div className="sort-container">
-        <label htmlFor="sort">Sort by: </label>
-        <select
+        <label className="sort-items" htmlFor="sort">
+          Sort by:
+        </label>
+        <Form.Select
+          className="sort-items"
           id="sort"
           name="sort"
-          style={{ width: "40%", textAlign: "center" }}
           value={sort}
           onChange={(e) => {
             setSort(e.target.value);
           }}
+          aria-label="Default select example"
         >
-          {sortOptions.map((val) => (
-            <option key={val.val} value={val.val}>
-              {val.display}
-            </option>
-          ))}
-        </select>
+          <option name="sort" value="confidence">
+            Best
+          </option>
+          <option name="sort" value="top">
+            Top
+          </option>
+          <option name="sort" value="new">
+            New
+          </option>
+          <option name="sort" value="controversial">
+            Controversial
+          </option>
+          <option name="sort" value="old">
+            Old
+          </option>
+          <option name="sort" value="qa">{`Q&A`}</option>
+        </Form.Select>
       </div>
       {(error || headerError) && <h2>Something went wrong.</h2>}
       <div className="saved-container">
