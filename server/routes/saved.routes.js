@@ -1,7 +1,7 @@
 import express from "express";
-import validateThreadData from "../middleware/validateThreadData";
+import validateThreadData from "../middleware/validateThreadData.js";
 import { saveThread, removeSaved, getByUser } from "../models/saved.model.js";
-import auth from "../middleware/auth.middleware";
+import auth from "../middleware/auth.middleware.js";
 const router = express.Router();
 
 router.put("/add", auth, validateThreadData, async (req, res) => {

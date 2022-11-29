@@ -1,5 +1,5 @@
 /**
- * Pulls out gif information, checks for valid information and that the url is valid
+ * Pulls out thread information, checks for valid information and that the url is valid
  * Sends out an error message with appropriate text if object doesn't fit needed criteria
  *
  * @param {Request} req - Express request object
@@ -8,9 +8,9 @@
  * @returns - Either returns next() to send to the next middleware OR a response with appropriate error
  */
 
-export default function validateGifData(req, res, next) {
-  const urlRegex =
-    /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)(.gif)/;
+export default function validateThreadData(req, res, next) {
+  //   const urlRegex =
+  //     /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)(.)/;
 
   const { url, id } = req.body;
   if (!url || !url.toString().match(urlRegex) || url.length > 64) {

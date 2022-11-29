@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import { login, register } from "../models/users.model";
-import validateUserData from "../middleware/validateUserData.middleware";
+import { login, register } from "../models/users.model.js";
+import validateUserData from "../middleware/validateUserData.middleware.js";
 const router = express.Router();
 
 router.put("/register", validateUserData, async (req, res) => {
