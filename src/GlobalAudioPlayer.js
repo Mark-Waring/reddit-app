@@ -17,7 +17,14 @@ export default function GlobalAudioPlayer() {
   const [handleRewind] = useHandleRewind();
   const [handleFwd] = useHandleFwd();
 
-  console.log(currentAudio?.progress);
+  const globalProgress = document.querySelector("#global-progress");
+
+  function clickedProgress(e) {
+    return (
+      (e.clientX - globalProgress.getBoundingClientRect().left) /
+      globalProgress.clientWidth
+    );
+  }
 
   return (
     <>
@@ -32,7 +39,16 @@ export default function GlobalAudioPlayer() {
                 ? currentAudio.title
                 : `${currentAudio.title.substring(0, 50)}...`}
             </div>
-            <div className="progress-bar-global" style={{ display: "flex" }}>
+            <div
+              id="global-progress"
+              className="progress-bar-global"
+              style={{ display: "flex" }}
+              onClick={(e) => {
+                currentAudio.progress =
+                  clickedProgress(e) * readIt(currentAudio).length;
+                handleSpeak();
+              }}
+            >
               <div
                 className="progress"
                 style={{

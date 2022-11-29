@@ -21,7 +21,7 @@ export default function OriginalPost({
   const [handleSpeak] = useHandleSpeak();
   const [handlePause] = useHandlePause();
 
-  const listening = currentAudio === currentThread;
+  const isListening = currentAudio === currentThread;
 
   useEffect(() => {
     if (!currentAudio || isPaused) {
@@ -41,18 +41,18 @@ export default function OriginalPost({
         <h3 className="op-title">{title}</h3>
         <div class="thread-play-container">
           <div className="thread-play">
-            {(!listening || !audioIsPlaying || isPaused) && (
+            {(!isListening || !audioIsPlaying || isPaused) && (
               <img
                 src={playButton}
                 alt={"play button"}
                 onClick={async () => {
-                  if (listening) {
+                  if (isListening) {
                     handleSpeak();
                   } else await setCurrentAudio(currentThread);
                 }}
               />
             )}
-            {listening && audioIsPlaying && !isPaused && (
+            {isListening && audioIsPlaying && !isPaused && (
               <img
                 src={pauseButton}
                 alt={"pause button"}

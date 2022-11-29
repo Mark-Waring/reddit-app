@@ -19,14 +19,23 @@ export default function SavedThread({ thread }) {
 
   const [handleSpeak] = useHandleSpeak();
   const [handlePause] = useHandlePause();
-  const listening = currentAudio === thread;
+  const isListening = currentAudio === thread;
 
   useEffect(() => {
-    if (listening && !isPaused) {
+    if (isListening && !isPaused) {
       handleSpeak();
     }
     // eslint-disable-next-line
   }, [isPaused, currentAudio]);
+
+  const threadProgress = document.querySelector("#thread-progress");
+
+  function clickedProgress(e) {
+    return (
+      (e.clientX - threadProgress.getBoundingClientRect().left) /
+      threadProgress.clientWidth
+    );
+  }
 
   return (
     <>
@@ -42,7 +51,17 @@ export default function SavedThread({ thread }) {
               </div>
             </div>
             <div className="thread-audio-container">
-              <div className="thread-progress-bar" style={{ display: "flex" }}>
+              <div
+                id="thread-progress"
+                className="thread-progress-bar"
+                style={{ display: "flex" }}
+                onClick={(e) => {
+                  if (!isListening) return;
+                  handlePause();
+                  thread.progress = clickedProgress(e) * readIt(thread).length;
+                  handleSpeak();
+                }}
+              >
                 <div
                   className="thread-progress"
                   style={{
@@ -64,7 +83,7 @@ export default function SavedThread({ thread }) {
             />
           </NavLink>
           <div className="thread-audio">
-            {(!listening || !audioIsPlaying || isPaused) && (
+            {(!isListening || !audioIsPlaying || isPaused) && (
               <img
                 className="thread-audio-button"
                 src={playButton}
@@ -75,7 +94,7 @@ export default function SavedThread({ thread }) {
                 }}
               />
             )}
-            {listening && audioIsPlaying && !isPaused && (
+            {isListening && audioIsPlaying && !isPaused && (
               <img
                 className="thread-audio-button"
                 src={pauseButton}
