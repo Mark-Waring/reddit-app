@@ -62,6 +62,7 @@ export default function GlobalAudioPlayer() {
             <div className="audio-control-container">
               <div className="audio-button">
                 <img
+                  className="audio-button-image"
                   src={backButton}
                   alt={"rewind button"}
                   onClick={() => handleRewind()}
@@ -70,6 +71,7 @@ export default function GlobalAudioPlayer() {
               <div className="audio-button">
                 {(!audioIsPlaying || isPaused) && (
                   <img
+                    className="audio-button-image"
                     src={playButton}
                     alt={"play button"}
                     onClick={() => handleSpeak()}
@@ -77,6 +79,7 @@ export default function GlobalAudioPlayer() {
                 )}
                 {audioIsPlaying && !isPaused && (
                   <img
+                    className="audio-button-image"
                     src={pauseButton}
                     alt={"pause button"}
                     onClick={() => handlePause()}
@@ -85,6 +88,7 @@ export default function GlobalAudioPlayer() {
               </div>
               <div className="audio-button">
                 <img
+                  className="audio-button-image"
                   src={fwdButton}
                   alt={"fast forward button"}
                   onClick={() => handleFwd()}

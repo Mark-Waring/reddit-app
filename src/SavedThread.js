@@ -42,8 +42,8 @@ export default function SavedThread({ thread }) {
       <div className="saved-thread">
         <div className="saved-left-align">
           <NavLink to={thread.id}>{thread.title}</NavLink>
-          <div class="saved-details">
-            <div class="saved-details-left">
+          <div className="saved-details">
+            <div className="saved-details-left">
               <div>{thread.subreddit}</div>
               <div className="saved-bottom">
                 <div className="saved-author">{`u/${thread.author}`}</div>
@@ -52,9 +52,9 @@ export default function SavedThread({ thread }) {
             </div>
             <div className="thread-audio-container">
               <div
+                style={{ cursor: isListening ? "pointer" : "" }}
                 id="thread-progress"
                 className="thread-progress-bar"
-                style={{ display: "flex" }}
                 onClick={(e) => {
                   if (!isListening) return;
                   handlePause();
@@ -105,7 +105,6 @@ export default function SavedThread({ thread }) {
           </div>
         </div>
       </div>
-      <hr />
     </>
   );
 }

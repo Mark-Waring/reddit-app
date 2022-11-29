@@ -39,7 +39,7 @@ export default function OriginalPost({
     <div className="original-post">
       <span className="op-title-span">
         <h3 className="op-title">{title}</h3>
-        <div class="thread-play-container">
+        <div className="thread-play-container">
           <div className="thread-play">
             {(!isListening || !audioIsPlaying || isPaused) && (
               <img
@@ -63,7 +63,7 @@ export default function OriginalPost({
         </div>
       </span>
       <div>{body}</div>
-      <div class="op-details-bottom">
+      <div className="op-details-bottom">
         <div className="op-details-left">
           <div>
             in {subreddit} by {author}
