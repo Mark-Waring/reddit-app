@@ -1,7 +1,7 @@
-import query from "../config/db.conf";
+import query from "../config/db.conf.js";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
-import { getByUser } from "./saved.model";
+import { getByUser } from "./saved.model.js";
 
 /**
  * Takes in a username and password, verifies the username doesn't exist (sending error if username is taken)
@@ -55,7 +55,7 @@ export async function login(username, password) {
     if (!match)
       return { error: "Invalid username or Password", success: false };
 
-    //! Get by userID and if not an error, send back object containing user info AND favorites
+    //! Get by userID and if not an error, send back object containing user info AND saved
     const { data, error } = await getByUser(user.id);
     if (error) {
       return { error, success: false };

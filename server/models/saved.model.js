@@ -1,4 +1,4 @@
-import query from "../config/db.conf";
+import query from "../config/db.conf.js";
 
 export async function saveThread(thread) {
   try {
@@ -8,7 +8,7 @@ export async function saveThread(thread) {
     );
     if (firstThread) return { error: "Already saved", success: false };
 
-    const { insertId } = await query("INSERT INTO favorite SET ? ", thread);
+    const { insertId } = await query("INSERT INTO saved SET ? ", thread);
 
     return { data: { insertId, ...thread }, success: true };
   } catch (err) {
@@ -19,7 +19,7 @@ export async function saveThread(thread) {
 
 export async function removeSaved(user_id, thread_id) {
   try {
-    await query("DELETE FROM favorite WHERE user_id = ? AND thread_id = ?", [
+    await query("DELETE FROM saved WHERE user_id = ? AND thread_id = ?", [
       user_id,
       thread_id,
     ]);
