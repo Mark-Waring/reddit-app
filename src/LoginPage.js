@@ -1,41 +1,34 @@
+import { auth } from "./firebase.config";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 import { AppContext } from "./AppContext";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 
-export default function LoginForm() {
-  const { setIsLoggedIn } = useContext(AppContext);
-  const navigate = useNavigate();
+const provider = new GoogleAuthProvider();
 
-  function handleLoginClick() {
-    setIsLoggedIn(true);
-    navigate("/");
+const LoginPage = () => {
+  const { setUser } = useContext(AppContext);
+  async function signIn() {
+    setPersistence(auth, browserLocalPersistence);
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const username = result.user;
+      setUser(username);
+      // ...
+    } catch (error) {
+      console.error("Something went wrong.");
+    }
   }
-
   return (
-    <form className="login-form" action="action_page.php" method="post">
-      <div className="login-container">
-        <label className="login-label" htmlFor="uname">
-          <b>Username</b>
-        </label>
-        <input type="text" placeholder="Enter Username" name="uname" required />
-
-        <label className="login-label" htmlFor="psw">
-          <b>Password</b>
-        </label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="psw"
-          required
-        />
-        <button
-          onClick={handleLoginClick}
-          className="login-submit"
-          type="submit"
-        >
-          Login
-        </button>
-      </div>
-    </form>
+    <div>
+      <h2>Login</h2>
+      <button onClick={signIn}>Sign In!</button>
+    </div>
   );
-}
+};
+
+export default LoginPage;

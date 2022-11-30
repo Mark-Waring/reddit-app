@@ -18,8 +18,6 @@ export default function Thread() {
     // eslint-disable-next-line
   }, [threadId]);
 
-  console.log(currentThread);
-
   return (
     <div className="thread-container">
       {currentThread && (

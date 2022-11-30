@@ -11,6 +11,7 @@ export function AppProvider(props) {
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
   const prevProgress = useRef(0);
+  const [user, setUser] = useState(null);
 
   function readReplies(replies) {
     if (!replies) return "";
@@ -39,38 +40,6 @@ export function AppProvider(props) {
     return `${readThread(thread)} ${readReplies(thread?.repliesArray)}`;
   }
 
-  const { mutate: addThread } = useMutation({
-    mutationFn: async (gif) => {
-      const { data } = await axios.put("/api/saved/add", thread);
-      return data;
-    },
-    onSuccess: (res) => {
-      if (res.success) {
-        addToState(res.data);
-      } else {
-        console.log(res.error);
-      }
-    },
-    onError: (err) => console.error(err),
-  });
-
-  const { mutate: removeSaved } = useMutation({
-    mutationFn: async (thread_id) => {
-      const { data } = await axios.delete(
-        `/api/favorites/delete/${thread_id}/`
-      );
-      return data;
-    },
-    onSuccess: (res) => {
-      if (res.success) {
-        removeFromState(res.data);
-      } else {
-        console.log(res.error);
-      }
-    },
-    onError: (err) => console.error(err),
-  });
-
   const value = {
     savedThreads,
     setSavedThreads,
@@ -88,6 +57,8 @@ export function AppProvider(props) {
     progress,
     setProgress,
     prevProgress,
+    user,
+    setUser,
   };
 
   return (

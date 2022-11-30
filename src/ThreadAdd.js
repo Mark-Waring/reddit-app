@@ -3,7 +3,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { AppContext } from "./AppContext";
 import SavedThreads from "./SavedThreads";
 import getThread, { getHeader } from "./getThread";
-import convertTime from "./convertTime";
 import Form from "react-bootstrap/Form";
 
 export default function ThreadAdd() {
@@ -37,9 +36,12 @@ export default function ThreadAdd() {
         replyNumber: data[0]?.data?.children[0].data?.num_comments,
       });
       setReplyBase(data[1]?.data?.children);
+      console.log(setReplyBase(data[1]?.data?.children));
     },
     enabled: !!url,
   });
+
+  console.log(replyBase);
 
   function getReplyData(base) {
     return base?.map((post) => {
@@ -56,13 +58,6 @@ export default function ThreadAdd() {
         replyNumber: baseData.replies?.data?.children?.length,
         id: baseData.id,
         level: baseData.depth + 1,
-        toRead: `${baseData.author}, ${convertTime(baseData.time)}, ${
-          baseData.body
-        }, ${baseData.score > 0 ? "+" : ""}${baseData.score}, ${
-          baseData.replies?.data?.children?.length ?? "No"
-        } repl${
-          baseData.replies?.data?.children?.length !== 1 ? "ies" : "y"
-        }, `,
         getNestedReplies: baseData?.replies
           ? getReplyData(baseData?.replies?.data?.children)
           : null,

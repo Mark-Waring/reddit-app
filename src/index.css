@@ -168,6 +168,7 @@ code {
 .thread-play {
   height: 40px;
   display: flex;
+  cursor: pointer;
 }
 
 

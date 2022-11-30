@@ -28,14 +28,18 @@ export default function SavedThread({ thread }) {
     // eslint-disable-next-line
   }, [isPaused, currentAudio]);
 
+  console.log(currentAudio?.repliesArray);
+
   const threadProgress = document.querySelector("#thread-progress");
 
   function clickedProgress(e) {
     return (
-      (e.clientX - threadProgress.getBoundingClientRect().left) /
-      threadProgress.clientWidth
+      (e.clientX - threadProgress?.getBoundingClientRect().left) /
+      threadProgress?.clientWidth
     );
   }
+
+  console.log(currentAudio);
 
   return (
     <>
