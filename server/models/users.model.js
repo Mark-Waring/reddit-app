@@ -47,13 +47,13 @@ export async function login(username, password) {
     ]);
 
     //! If there ins't a user, let them know they did something wrong
-    if (!user) return { error: "Invalid Username or password", success: false };
+    if (!user) return { error: "Invalid username or password", success: false };
 
     //! Check to see if their password is correct
     const match = await bcrypt.compare(password, user.password);
     //! If not, send back an error message
     if (!match)
-      return { error: "Invalid username or Password", success: false };
+      return { error: "Invalid username or password", success: false };
 
     //! Get by userID and if not an error, send back object containing user info AND saved
     const { data, error } = await getByUser(user.id);
