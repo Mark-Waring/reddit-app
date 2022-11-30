@@ -29,7 +29,7 @@ export function AppProvider(props) {
 
   function readThread(thread) {
     if (!thread) return "";
-    return `${thread.author}, ${convertTime(thread.time)}, ${
+    return `${thread.title}, ${thread.author}, ${convertTime(thread.time)}, ${
       thread.body
     }, Score, ${thread.score}, ${thread.replyNumber ?? "No"} comment${
       thread.replyNumber !== 1 ? "s" : ""

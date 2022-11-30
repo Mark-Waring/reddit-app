@@ -37,6 +37,9 @@
     "back": "SET NODE_ENV=DEVELOPMENT && nodemon --exec babel-node server.js",
     "prod": "webpack --config webpack.config.server.js"
   },
+  "engines": {
+    "node": "v18.9.0"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -57,7 +60,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.19.6",
+    "@babel/core": "^7.20.5",
     "@babel/node": "^7.20.0",
     "@babel/preset-env": "^7.19.4",
     "babel-loader": "^9.0.1",
