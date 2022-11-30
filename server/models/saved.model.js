@@ -3,7 +3,7 @@ import query from "../config/db.conf.js";
 export async function saveThread(thread) {
   try {
     const [firstThread] = await query(
-      "SELECT * FROM saved WHERE saved.user_id = ? AND saved.id = ?",
+      "SELECT * FROM saved WHERE saved.user_id = ? AND saved.thread_id = ?",
       [thread.user_id, thread.id]
     );
     if (firstThread) return { error: "Already saved", success: false };
@@ -33,7 +33,7 @@ export async function removeSaved(user_id, thread_id) {
 export async function getByUser(user_id) {
   try {
     const savedThreads = await query(
-      "SELECT id, title, author, flair, time, body,  score, bodyHtml, subreddit, header, replyNumber, repliesArray, progress FROM saved WHERE thread.user_id = ?",
+      "SELECT id, title, author, flair, time, body,  score, subreddit, header, replyNumber, repliesArray, progress FROM saved WHERE thread.user_id = ?",
       [user_id]
     );
     return { data: saved, success: true };

@@ -25,6 +25,7 @@ pool.getConnection((err, connection) => {
     }
   }
   if (connection) connection.release();
+  console.log("You are connected to the database");
 });
 
 const query = util.promisify(pool.query).bind(pool);
