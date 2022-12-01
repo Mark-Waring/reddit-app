@@ -3,7 +3,7 @@ import convertTime from "./convertTime";
 export const AppContext = createContext();
 
 export function AppProvider(props) {
-  const [savedThreads, setSavedThreads] = useState([]);
+  const [savedThreads, setSavedThreads] = useState(null);
   const [searchUrl, setSearchUrl] = useState("");
   const [sort, setSort] = useState("confidence");
   const [currentAudio, setCurrentAudio] = useState(null);

@@ -4,8 +4,10 @@ import { AppContext } from "./AppContext";
 import SavedThreads from "./SavedThreads";
 import getThread, { getHeader } from "./getThread";
 import Form from "react-bootstrap/Form";
+import { getDatabase, ref, set } from "firebase/database";
 
 export default function ThreadAdd() {
+  const db = getDatabase();
   const [url, setUrl] = useState(null);
   const [postData, setPostData] = useState(null);
   const [replyBase, setReplyBase] = useState(null);
@@ -13,7 +15,7 @@ export default function ThreadAdd() {
   const [headerImage, setHeaderImage] = useState(null);
   const { sort, setSort } = useContext(AppContext);
   const now = Math.round(Date.now() / 1000);
-  const { savedThreads, setSavedThreads } = useContext(AppContext);
+  const { savedThreads, setSavedThreads, user } = useContext(AppContext);
   const [threadInput, setThreadInput] = useState("");
 
   const { error } = useQuery([("getThread", url)], () => getThread(url, sort), {
@@ -92,14 +94,14 @@ export default function ThreadAdd() {
         title: postData.title,
         id: postData.id,
         author: postData.author,
-        flair: postData.flair,
+        flair: postData.flair || "",
         time: postData.time,
         body: postData.body,
         score: postData.score,
         subreddit: postData.subreddit,
         header: headerImage,
         replyNumber: postData.replyNumber ?? "0",
-        repliesArray: getReplyData(replyBase),
+        repliesArray: JSON.parse(JSON.stringify(getReplyData(replyBase))),
         progress: 0,
       },
       ...savedThreads,
@@ -107,6 +109,13 @@ export default function ThreadAdd() {
     setPostData(null);
     // eslint-disable-next-line
   }, [queryCompleted]);
+
+  useEffect(() => {
+    if (!savedThreads) return;
+    set(ref(db, `saved-threads/${user.uid}`), savedThreads);
+  }, [savedThreads]);
+
+  console.log(savedThreads);
 
   return (
     <>

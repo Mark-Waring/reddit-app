@@ -7,6 +7,7 @@ import GlobalAudioPlayer from "./GlobalAudioPlayer.js";
 import { useContext, useEffect } from "react";
 import { AppContext } from "./AppContext";
 import LoginPage from "./LoginPage";
+import { getDatabase, ref, child, get } from "firebase/database";
 
 function App() {
   const {
@@ -16,9 +17,27 @@ function App() {
     prevProgress,
     user,
     setUser,
+    setSavedThreads,
+    savedThreads,
   } = useContext(AppContext);
 
   auth.onAuthStateChanged((activeUser) => setUser(activeUser));
+
+  useEffect(() => {
+    if (!user) return;
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `saved-threads/${user.uid}`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setSavedThreads(snapshot.val());
+        } else {
+          setSavedThreads([]);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [user]);
 
   useEffect(() => {
     if (!currentAudio) return;
