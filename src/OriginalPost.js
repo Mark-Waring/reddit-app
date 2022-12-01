@@ -16,22 +16,24 @@ export default function OriginalPost({
   subreddit,
   currentThread,
 }) {
-  const { currentAudio, setCurrentAudio, audioIsPlaying, isPaused } =
-    useContext(AppContext);
+  const {
+    currentAudio,
+    setCurrentAudio,
+    audioIsPlaying,
+    isPaused,
+    setIsPaused,
+  } = useContext(AppContext);
   const [handleSpeak] = useHandleSpeak();
   const [handlePause] = useHandlePause();
 
   const isListening = currentAudio === currentThread;
 
   useEffect(() => {
-    if (!currentAudio || isPaused) {
-      return;
-    }
-    if (currentAudio) {
+    if (isListening && !isPaused) {
       handleSpeak();
     }
     // eslint-disable-next-line
-  }, [currentAudio]);
+  }, [isPaused, currentAudio]);
 
   console.log(currentAudio);
 
@@ -45,10 +47,9 @@ export default function OriginalPost({
               <img
                 src={playButton}
                 alt={"play button"}
-                onClick={async () => {
-                  if (isListening) {
-                    handleSpeak();
-                  } else await setCurrentAudio(currentThread);
+                onClick={() => {
+                  setIsPaused(false);
+                  setCurrentAudio(currentThread);
                 }}
               />
             )}

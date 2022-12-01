@@ -28,8 +28,6 @@ export default function SavedThread({ thread }) {
     // eslint-disable-next-line
   }, [isPaused, currentAudio]);
 
-  console.log(currentAudio?.repliesArray);
-
   const threadProgress = document.querySelector("#thread-progress");
 
   function clickedProgress(e) {
@@ -38,8 +36,6 @@ export default function SavedThread({ thread }) {
       threadProgress?.clientWidth
     );
   }
-
-  console.log(currentAudio);
 
   return (
     <>
@@ -92,9 +88,9 @@ export default function SavedThread({ thread }) {
                 className="thread-audio-button"
                 src={playButton}
                 alt={"play button"}
-                onClick={async () => {
-                  await setIsPaused(false);
-                  await setCurrentAudio(thread);
+                onClick={() => {
+                  setIsPaused(false);
+                  setCurrentAudio(thread);
                 }}
               />
             )}
