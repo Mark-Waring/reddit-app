@@ -10,22 +10,12 @@ import LoginPage from "./LoginPage";
 import { getDatabase, ref, child, get } from "firebase/database";
 
 function App() {
-  const {
-    audioIsPlaying,
-    currentAudio,
-    progress,
-    prevProgress,
-    user,
-    setUser,
-    setSavedThreads,
-    savedThreads,
-  } = useContext(AppContext);
-
-  auth.onAuthStateChanged((activeUser) => setUser(activeUser));
+  const dbRef = ref(getDatabase());
+  const { audioIsPlaying, user, setUser, setSavedThreads } =
+    useContext(AppContext);
 
   useEffect(() => {
     if (!user) return;
-    const dbRef = ref(getDatabase());
     get(child(dbRef, `saved-threads/${user.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -37,13 +27,10 @@ function App() {
       .catch((error) => {
         console.error(error);
       });
-  }, [user]);
-
-  useEffect(() => {
-    if (!currentAudio) return;
-    currentAudio.progress = prevProgress.current + progress;
     // eslint-disable-next-line
-  }, [progress]);
+  }, [user?.uid]);
+
+  console.log("hello");
 
   return (
     <Router>

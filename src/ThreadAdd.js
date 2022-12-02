@@ -17,10 +17,10 @@ export default function ThreadAdd() {
   const now = Math.round(Date.now() / 1000);
   const { savedThreads, setSavedThreads, user } = useContext(AppContext);
   const [threadInput, setThreadInput] = useState("");
+  const [isDuplicate, setIsDuplicate] = useState(false);
 
   const { error } = useQuery([("getThread", url)], () => getThread(url, sort), {
     onSuccess: (data) => {
-      console.log(data);
       const baseData = data[0]?.data?.children[0].data;
       setPostData({
         author: baseData?.author,
@@ -38,12 +38,9 @@ export default function ThreadAdd() {
         replyNumber: data[0]?.data?.children[0].data?.num_comments,
       });
       setReplyBase(data[1]?.data?.children);
-      console.log(setReplyBase(data[1]?.data?.children));
     },
     enabled: !!url,
   });
-
-  console.log(replyBase);
 
   function getReplyData(base) {
     return base?.map((post) => {
@@ -64,6 +61,7 @@ export default function ThreadAdd() {
           ? getReplyData(baseData?.replies?.data?.children)
           : null,
       };
+
       return details;
     });
   }
@@ -73,7 +71,6 @@ export default function ThreadAdd() {
     () => getHeader(postData?.subreddit),
     {
       onSuccess: (data) => {
-        console.log("query running");
         setHeaderImage(
           data?.data?.community_icon
             ? data?.data?.community_icon?.split("?")[0]
@@ -88,6 +85,13 @@ export default function ThreadAdd() {
   useEffect(() => {
     if (!queryCompleted) {
       return;
+    }
+    if (
+      savedThreads &&
+      savedThreads.find((thread) => thread?.id === postData.id)
+    ) {
+      setThreadInput("Thread already in library");
+      return setIsDuplicate(true);
     }
     setSavedThreads([
       {
@@ -113,9 +117,11 @@ export default function ThreadAdd() {
   useEffect(() => {
     if (!savedThreads) return;
     set(ref(db, `saved-threads/${user.uid}`), savedThreads);
+    // eslint-disable-next-line
   }, [savedThreads]);
 
-  console.log(savedThreads);
+  const urlConditions = ["reddit.com/r/", "comments"];
+  const isUrlValid = new RegExp(urlConditions.join("|")).test(threadInput);
 
   return (
     <>
@@ -125,9 +131,16 @@ export default function ThreadAdd() {
           className="add-thread-item add-thread-input"
           type="text"
           value={threadInput || ""}
-          onChange={(e) => setThreadInput(e.target.value)}
+          onChange={(e) => {
+            setThreadInput(e.target.value);
+            setIsDuplicate(false);
+          }}
+          style={{
+            color: isDuplicate ? "red" : "black",
+          }}
         />
         <button
+          disabled={!isUrlValid}
           className="add-thread-item add-thread-button"
           onClick={(e) => {
             e.preventDefault();

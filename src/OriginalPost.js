@@ -35,12 +35,11 @@ export default function OriginalPost({
     // eslint-disable-next-line
   }, [isPaused, currentAudio]);
 
-  console.log(currentAudio);
-
   return (
     <div className="original-post">
       <span className="op-title-span">
         <h3 className="op-title">{title}</h3>
+
         <div className="thread-play-container">
           <div className="thread-play">
             {(!isListening || !audioIsPlaying || isPaused) && (

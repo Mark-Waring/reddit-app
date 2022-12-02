@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "./AppContext";
 import backButton from "./audio-icons/back.png";
 import playButton from "./audio-icons/play.png";
@@ -8,10 +8,20 @@ import useHandleSpeak from "./audio-functions/useHandleSpeak.js";
 import useHandlePause from "./audio-functions/useHandlePause.js";
 import useHandleRewind from "./audio-functions/useHandleRewind";
 import useHandleFwd from "./audio-functions/useHandleFwd";
+import { getDatabase, ref, set } from "firebase/database";
 
 export default function GlobalAudioPlayer() {
-  const { audioIsPlaying, isPaused, readIt, currentAudio } =
-    useContext(AppContext);
+  const db = getDatabase();
+  const {
+    user,
+    savedThreads,
+    audioIsPlaying,
+    isPaused,
+    readIt,
+    currentAudio,
+    progress,
+    prevProgress,
+  } = useContext(AppContext);
   const [handleSpeak] = useHandleSpeak();
   const [handlePause] = useHandlePause();
   const [handleRewind] = useHandleRewind();
@@ -26,6 +36,17 @@ export default function GlobalAudioPlayer() {
     );
   }
 
+  useEffect(() => {
+    if (!currentAudio) return;
+    currentAudio.progress = prevProgress.current + progress;
+    // eslint-disable-next-line
+  }, [progress]);
+
+  useEffect(() => {
+    if (currentAudio) set(ref(db, `saved-threads/${user?.uid}`), savedThreads);
+    // eslint-disable-next-line
+  }, [isPaused, currentAudio]);
+
   return (
     <>
       <div
@@ -36,8 +57,8 @@ export default function GlobalAudioPlayer() {
           <div className="global-audio-details">
             <div className="global-audio-title">
               {currentAudio?.title.length < 50
-                ? currentAudio.title
-                : `${currentAudio.title.substring(0, 50)}...`}
+                ? currentAudio?.title
+                : `${currentAudio?.title.substring(0, 50)}...`}
             </div>
             <div
               id="global-progress"
@@ -45,7 +66,7 @@ export default function GlobalAudioPlayer() {
               style={{ display: "flex" }}
               onClick={(e) => {
                 currentAudio.progress =
-                  clickedProgress(e) * readIt(currentAudio).length;
+                  clickedProgress(e) * readIt(currentAudio)?.length;
                 handleSpeak();
               }}
             >
@@ -53,7 +74,7 @@ export default function GlobalAudioPlayer() {
                 className="progress"
                 style={{
                   width: `${
-                    (currentAudio?.progress / readIt(currentAudio).length) *
+                    (currentAudio?.progress / readIt(currentAudio)?.length) *
                       100 || 0
                   }%`,
                 }}

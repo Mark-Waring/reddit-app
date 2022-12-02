@@ -10,11 +10,14 @@ import useHandlePause from "./audio-functions/useHandlePause.js";
 export default function SavedThread({ thread }) {
   const {
     audioIsPlaying,
+    setAudioIsPlaying,
     isPaused,
     setIsPaused,
     currentAudio,
     setCurrentAudio,
     readIt,
+    setSavedThreads,
+    savedThreads,
   } = useContext(AppContext);
 
   const [handleSpeak] = useHandleSpeak();
@@ -37,6 +40,17 @@ export default function SavedThread({ thread }) {
     );
   }
 
+  function handleDelete(e) {
+    if (isListening) {
+      handlePause();
+      setAudioIsPlaying(false);
+    }
+    const updatedSaved = savedThreads.filter((thread) => {
+      return thread.id !== e.target.value;
+    });
+    setSavedThreads(updatedSaved);
+  }
+
   return (
     <>
       <div className="saved-thread">
@@ -44,7 +58,15 @@ export default function SavedThread({ thread }) {
           <NavLink to={thread.id}>{thread.title}</NavLink>
           <div className="saved-details">
             <div className="saved-details-left">
-              <div>{thread.subreddit}</div>
+              <div className="thread-subreddit">{thread.subreddit}</div>
+              <button
+                alt={"delete"}
+                value={thread.id}
+                onClick={handleDelete}
+                className="delete-button"
+              >
+                Delete
+              </button>
               <div className="saved-bottom">
                 <div className="saved-author">{`u/${thread.author}`}</div>
                 <div className="saved-time">{convertTime(thread.time)}</div>
