@@ -5,7 +5,7 @@ import { auth } from "../firebase.config";
 import { signOut } from "firebase/auth";
 
 export default function NavBar() {
-  const { setUser } = useContext(AppContext);
+  const { setUser, setAudioIsPlaying } = useContext(AppContext);
 
   async function logOut() {
     try {
@@ -16,6 +16,7 @@ export default function NavBar() {
       console.error("Unable to sign out");
     }
     window.speechSynthesis.cancel();
+    setAudioIsPlaying(false);
   }
 
   return (
