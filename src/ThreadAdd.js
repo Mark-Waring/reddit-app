@@ -83,7 +83,7 @@ export default function ThreadAdd() {
   );
 
   useEffect(() => {
-    if (!queryCompleted) {
+    if (!queryCompleted || !postData.id) {
       return;
     }
     if (
@@ -115,8 +115,9 @@ export default function ThreadAdd() {
   }, [queryCompleted]);
 
   useEffect(() => {
-    if (!savedThreads) return;
-    set(ref(db, `saved-threads/${user.uid}`), savedThreads);
+    if (savedThreads) {
+      set(ref(db, `saved-threads/${user.uid}`), savedThreads);
+    }
     // eslint-disable-next-line
   }, [savedThreads]);
 

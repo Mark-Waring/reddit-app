@@ -3,7 +3,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: -webkit-fill-available;
-
+  background-color: aliceblue;
   font-family: Arial, Helvetica, sans-serif;
   word-wrap: break-word;
 }
@@ -15,17 +15,51 @@ body {
 }
 
 .delete-button {
-  width: 30px;
   height: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  font-weight: bold;
   border-radius: 7px;
+  width: fit-content;
+  padding: 8px;
 }
 
-.pop-up {}
+.login-header {
+  margin-top: 0px
+}
+
+.login-button {
+  width: 35%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 75%;
+}
+
+button:active {
+  transform: scale(.98);
+
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.nav-bar {
+  background-color: navy;
+  width: 100%;
+  display: flex;
+  height: 5vh;
+  align-items: center;
+}
 
 .thread-subreddit {
   padding-bottom: 7px
@@ -34,6 +68,22 @@ body {
 .saved-bottom {
   padding-top: 7px;
 }
+
+.nav-left {
+  margin-right: auto;
+  padding-left: 1.5%;
+}
+
+.nav-right {
+  padding-right: 1.5%;
+}
+
+.nav-bar a {
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+}
+
 
 .replies-container,
 .saved-left-align {
@@ -133,6 +183,7 @@ code {
   height: 100%;
   background-color: dimgrey;
 }
+
 
 
 
@@ -327,9 +378,22 @@ h1,
   width: 90%;
 }
 
+a:visited {
+  color: blue;
+}
+
+.nav-bar a {
+  color: white;
+}
+
+.thread-container {
+  background: white;
+}
+
 .saved-thread {
   display: flex;
   border: 1px solid #404040;
+  background-color: white;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 15px;

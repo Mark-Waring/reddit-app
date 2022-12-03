@@ -8,11 +8,14 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "./AppContext";
 import LoginPage from "./LoginPage";
 import { getDatabase, ref, child, get } from "firebase/database";
+import NavBar from "./Navbar";
 
 function App() {
   const dbRef = ref(getDatabase());
   const { audioIsPlaying, user, setUser, setSavedThreads } =
     useContext(AppContext);
+
+  auth.onAuthStateChanged((activeUser) => setUser(activeUser));
 
   useEffect(() => {
     if (!user) return;
@@ -30,11 +33,10 @@ function App() {
     // eslint-disable-next-line
   }, [user?.uid]);
 
-  console.log("hello");
-
   return (
     <Router>
       <div className="route-wrapper">
+        <NavBar />
         <Routes>
           <Route
             exact

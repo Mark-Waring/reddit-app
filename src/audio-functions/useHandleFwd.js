@@ -9,16 +9,9 @@ export default function useHandleFwd() {
     window.speechSynthesis.cancel();
     currentAudio.progress = prevProgress.current + progress + 60;
     prevProgress.current = currentAudio.progress;
-    const track = readIt(currentAudio)?.slice(
-      prevProgress.current,
-      readIt(currentAudio).length
-    );
+    const track = readIt(currentAudio)?.slice(prevProgress.current);
     const utterance = new SpeechSynthesisUtterance(track);
     const synth = window.speechSynthesis;
-    if (!synth) {
-      console.error("no tts");
-      return;
-    }
     utterance.addEventListener("boundary", ({ charIndex }) => {
       setProgress(charIndex);
     });

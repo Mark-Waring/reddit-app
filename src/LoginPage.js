@@ -24,9 +24,11 @@ const LoginPage = () => {
     }
   }
   return (
-    <div>
-      <h2>Login</h2>
-      <button onClick={signIn}>Sign In!</button>
+    <div className="login-wrapper">
+      <h2 className="login-header">Log in to continue</h2>
+      <button className="login-button" onClick={signIn}>
+        Sign In!
+      </button>
     </div>
   );
 };
