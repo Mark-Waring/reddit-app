@@ -8,12 +8,24 @@
  * @returns - Either returns next() to send to the next middleware OR a response with appropriate error
  */
 
+const restaurantOwnerOnlyMiddleware = (req, res, next) => {
+  const user = req.user; // available if you're using Google Firebase Authentication Middleware
+  const hasPermission = (user) => true;
+
+  next(); // don't forget this. this will pass the request to the next middleware in the chain
+};
+
 export default function validateThreadData(req, res, next) {
-  //   const urlRegex =
-  //     /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)(.)/;
+  const urlConditions = ["reddit.com/r/", "comments"];
+  const isUrlValid = new RegExp(urlConditions.join("|")).test(threadInput);
+
+  if (!hasPermission(restaurantId, user)) {
+    res.status(403).send("Unauthorized");
+    return;
+  }
 
   const { url, id } = req.body;
-  if (!url || !url.toString().match(urlRegex) || url.length > 64) {
+  if (!url || !isUrlValid) {
     return res.send({ success: false, error: "Invalid Thread URL" });
   }
 

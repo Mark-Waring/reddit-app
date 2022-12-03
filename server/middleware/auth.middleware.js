@@ -1,13 +1,28 @@
-import passport from "passport";
+// import admin from "./firebase-service";
 
-export default function auth(req, res, next) {
-  //! Implement my authentication
-  passport.authenticate("jwt", (err, user, info) => {
-    //! If no user OR there was an error
-    if (err || !user)
-      return res.send({ error: "Invalid Credentials", success: false });
+// const getAuthToken = (req, res, next) => {
+//   if (
+//     req.headers.authorization &&
+//     req.headers.authorization.split(" ")[0] === "Bearer"
+//   ) {
+//     req.authToken = req.headers.authorization.split(" ")[1];
+//   } else {
+//     req.authToken = null;
+//   }
+//   next();
+// };
 
-    req.user = user;
-    return next();
-  })(req, res, next);
-}
+// export const checkIfAuthenticated = (req, res, next) => {
+//   getAuthToken(req, res, async () => {
+//     try {
+//       const { authToken } = req;
+//       const userInfo = await admin.auth().verifyIdToken(authToken);
+//       req.authId = userInfo.uid;
+//       return next();
+//     } catch (e) {
+//       return res
+//         .status(401)
+//         .send({ error: "You are not authorized to make this request" });
+//     }
+//   });
+// };
