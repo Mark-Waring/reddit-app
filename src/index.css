@@ -1,38 +1,135 @@
 body {
   margin: 0px;
-  display: flex;
-  flex-direction: column;
   min-height: -webkit-fill-available;
   background-color: aliceblue;
-  font-family: Arial, Helvetica, sans-serif;
   word-wrap: break-word;
 }
 
-.route-wrapper {
+body,
+code,
+.sort-items,
+.add-thread-button {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+h1,
+.route-wrapper,
+.delete-button,
+.login-wrapper,
+.nav-bar,
+.audio-container,
+.thread-progress-bar,
+.saved-right-align,
+.global-player-container,
+.audio-button,
+.global-player,
+.global-audio-details,
+.op-details-right,
+.thread-play-container,
+.op-title-span,
+.op-comments-container,
+.thread-play,
+.op-details-bottom,
+.thread-audio-container,
+.audio-control-container,
+.saved-bottom,
+.add-thread-form,
+.thread,
+.thread-container,
+.sort-container,
+.login-form,
+.login-container,
+.saved-container,
+.saved-thread,
+.saved-left-align,
+.saved-details-left,
+.saved-details,
+.left-bottom,
+.replies-author,
+.replies-span {
   display: flex;
+}
+
+body,
+.route-wrapper,
+.login-wrapper,
+.saved-right-align,
+.global-audio-details,
+.thread,
+.thread-container,
+.saved-left-align,
+.saved-details-left,
+.left-bottom {
   flex-direction: column;
+}
+
+.delete-button,
+.route-wrapper,
+.login-wrapper,
+.nav-bar,
+.audio-container,
+.saved-right-align,
+.global-audio-details,
+.thread-play-container,
+.op-details-bottom,
+.thread-audio-container,
+.audio-control-container {
   align-items: center;
+}
+
+h1,
+.delete-button,
+.global-player-container,
+.audio-button,
+.op-details-right,
+.thread-play-container,
+.add-thread-form,
+.login-container,
+.login-form {
+  justify-content: center;
 }
 
 .delete-button {
   height: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 7px;
   width: fit-content;
   padding: 8px;
+}
+
+a:visited {
+  color: blue;
+}
+
+.delete-button,
+.login-button,
+.nav-bar a,
+.progress-bar-global,
+.audio-button-image,
+.thread-play,
+.thread-audio-button,
+.add-thread-button {
   cursor: pointer;
 }
 
-.login-header {
+.login-header,
+.op-title-span {
   margin-top: 0px
+}
+
+.login-button,
+.login-wrapper,
+.saved-thread {
+  border-radius: 10px;
+}
+
+.saved-details-left,
+.saved-details {
+  height: -webkit-fill-available;
 }
 
 .login-button {
   width: 35%;
-  border-radius: 10px;
-  cursor: pointer;
 }
 
 button:hover:enabled {
@@ -41,25 +138,21 @@ button:hover:enabled {
 
 button:active:enabled {
   transform: scale(.98);
+}
 
+.login-wrapper,
+.saved-thread {
+  padding: 10px;
 }
 
 .login-wrapper {
-  display: flex;
-  flex-direction: column;
   border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
   margin-top: 10px;
-  align-items: center;
 }
 
 .nav-bar {
   background-color: navy;
-  width: 100%;
-  display: flex;
   height: 5vh;
-  align-items: center;
 }
 
 .thread-subreddit {
@@ -70,8 +163,12 @@ button:active:enabled {
   padding-top: 7px;
 }
 
-.nav-left {
+.nav-left,
+.saved-left-align {
   margin-right: auto;
+}
+
+.nav-left {
   padding-left: 1.5%;
 }
 
@@ -81,150 +178,152 @@ button:active:enabled {
 
 .nav-bar a {
   text-decoration: none;
-  cursor: pointer;
-  color: white;
 }
-
 
 .replies-container,
 .saved-left-align {
   font-size: 14px;
 }
 
-code {
-  font-family: Arial, Helvetica, sans-serif;
+.audio-container,
+.audio-control-container {
+  justify-content: space-around;
 }
 
-.audio-container {
-  display: flex;
+.audio-container,
+.progress-bar {
   flex-grow: 1;
-  align-items: center;
-  justify-content: space-around;
-  padding-left: 8px;
+}
+
+.audio-container,
+.thread-audio-container,
+.saved-details-left {
   width: 50%
 }
 
-.progress-bar {
-  display: flex;
-  flex-grow: 1;
+.audio-container {
+  padding-left: 8px;
+}
+
+.progress-bar,
+.thread-progress-bar,
+.progress-bar-global,
+.delete-button {
   border: 1px solid grey;
+}
+
+.progress-bar,
+.thread-progress-bar,
+.progress,
+.thread-progress,
+.progress-bar-global,
+.sort-items,
+.add-thread-button {
   border-radius: 4px;
+}
+
+.progress-bar,
+.thread-progress-bar,
+.progress-bar-global {
   width: 70%;
-  height: 5px;
-  align-self: center;
+}
+
+.progress-bar,
+.progress-bar-global,
+.audio-controls,
+.add-thread-item,
+.saved-thread img {
   margin-left: 5px;
 }
 
-.thread-progress-bar {
-  display: flex;
-  border: 1px solid grey;
-  border-radius: 4px;
-  width: 70%;
+.progress-bar,
+.thread-progress-bar,
+.progress-bar-global {
   height: 5px;
-  align-self: center;
-}
-
-.progress,
-.thread-progress {
-  border-radius: 4px;
-}
-
-.saved-right-align {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .progress-bar-global {
-  display: flex;
-  border: 1px solid grey;
-  border-radius: 4px;
-  width: 70%;
-  height: 5px;
-  align-self: center;
-  margin-left: 5px;
   background-color: darkgrey;
-  cursor: pointer
 }
 
 .thread-progress {
   background-color: black;
 }
 
-.progress {
+.progress,
+.saved-thread,
+.thread-container {
   background-color: white;
 }
 
+hr,
+.global-player-container,
+.audio-button,
+.global-player,
+.global-audio-details,
+.thread-audio-button,
+.thread-container,
+.nav-bar {
+  width: 100%;
 
-
+}
 
 .global-player-container {
-  display: flex;
   height: 15%;
-  width: 100%;
-  justify-content: center;
   bottom: 0;
   position: fixed;
   box-shadow: 0 4px 12px 0
 }
 
-.audio-button {
-  display: flex;
+.audio-button,
+.global-player {
   height: 100%;
-  justify-content: center;
-  width: 100%;
-}
-
-.audio-button-image {
-  cursor: pointer;
 }
 
 .global-player {
-  display: flex;
-  width: 100%;
-  height: 100%;
   background-color: dimgrey;
 }
 
-
-
-
 .global-audio-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
   justify-content: space-evenly;
+}
+
+.global-audio-title,
+.nav-bar a,
+.op-audio-control {
+  color: white;
 }
 
 .global-audio-title {
   font-size: 15px;
-  color: white;
+}
+
+.op-details-left,
+.saved-details-left,
+.replies-details {
+  color: grey;
 }
 
 .op-details-left {
   width: 75%;
-  font-size: smaller;
-  color: grey
 }
 
-.op-details-right {
-  display: flex;
-  justify-content: center;
+.op-details-left,
+.replies-details {
+  font-size: smaller;
+}
+
+.op-comments-container {
   width: 25%;
-  font-size: 40px;
 }
 
 .thread-play-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 10%
 }
 
-.op-title-span {
-  display: flex;
-  margin-top: 0px;
+.op-title-span,
+.saved-details-left,
+.replies-span {
   justify-content: space-between;
 }
 
@@ -233,29 +332,21 @@ code {
 }
 
 .op-comments-container {
-  width: 25%;
-  display: flex;
   justify-content: flex-end;
   align-self: flex-end;
 }
 
 .thread-play {
   height: 40px;
-  display: flex;
-  cursor: pointer;
 }
 
-
-
-.op-details-bottom {
-  display: flex;
-  align-items: center;
+.op-details-bottom,
+.saved-container {
   padding-top: 20px;
 }
 
-
-
-.op-comments {
+.op-comments,
+.replies-author {
   font-weight: bold;
 }
 
@@ -264,109 +355,52 @@ code {
 }
 
 .thread-audio-container {
-  display: flex;
   justify-content: space-evenly;
-  align-items: center;
-  width: 50%;
+}
+
+.thread-audio,
+.sort-container {
+  padding-top: 10px;
 }
 
 .thread-audio {
   width: 30%;
-  padding-top: 10px;
-}
-
-.thread-audio-button {
-  width: 100%;
-  cursor: pointer;
 }
 
 .audio-control-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 40px;
   width: 18%;
   height: 26%;
 }
 
-/* media query audio-control contatiner 
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 40px;
-  width: 10%;
-  height: 40%; */
-
-.saved-author {
+.saved-author,
+.sort-items {
   padding-right: 5px;
 }
 
 .saved-bottom {
-  display: flex;
   flex-wrap: wrap;
   margin-right: 10px;
 }
 
-.audio-controls {
-  margin-left: 5px;
+.audio-controls,
+.add-thread-item {
   margin-right: 5px;
 }
 
-h1,
-.add-thread-form {
-  display: flex;
-  justify-content: center;
-}
-
 .thread {
-  display: flex;
-  flex-direction: column;
   margin: 10px
-}
-
-.thread-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%
 }
 
 .sort-items {
   padding-left: 5px;
-  padding-right: 5px;
 }
 
 .sort-container {
-  display: flex;
   align-items: flex-end;
-  padding-top: 10px;
-}
-
-.add-thread-item {
-  margin-left: 5px;
-  margin-right: 5px;
 }
 
 .replies-border {
   border-left: 2px solid red;
-}
-
-.replies-author {
-  font-weight: bold;
-}
-
-.replies-details {
-  font-size: smaller;
-  color: grey
-}
-
-.login-form,
-.login-container {
-  display: flex;
-}
-
-.login-container,
-.login-form {
-  justify-content: center;
 }
 
 .login-form .login-container {
@@ -374,104 +408,34 @@ h1,
 }
 
 .saved-container {
-  display: flex;
   flex-flow: column wrap;
-  padding-top: 20px;
   width: 90%;
 }
 
-a:visited {
-  color: blue;
-}
-
-.nav-bar a {
-  color: white;
-}
-
-.thread-container {
-  background: white;
+.saved-thread,
+.add-thread-button,
+.add-thread-input {
+  border: 1px solid #404040;
 }
 
 .saved-thread {
-  display: flex;
-  border: 1px solid #404040;
-  background-color: white;
-  border-radius: 10px;
-  padding: 10px;
   margin-bottom: 15px;
 }
 
-
 .saved-thread img {
   max-height: 75px;
-  margin-left: 5px;
-
 }
 
 .saved-left-align {
-  margin-right: auto;
-  display: flex;
-  flex-direction: column;
   width: -webkit-fill-available;
 }
-
-hr {
-  width: 100%
-}
-
-.saved-details-left {
-  flex-direction: column;
-  width: 50%;
-  justify-content: space-between;
-  color: grey;
-  height: -webkit-fill-available;
-  display: flex;
-}
-
-.saved-details {
-  display: flex;
-  height: -webkit-fill-available
-}
-
-.op-audio-control {
-  color: white;
-}
-
-.left-bottom {
-  display: flex;
-  flex-direction: column;
-}
-
 
 .details-right-align {
   margin-left: auto;
 }
 
-.sort-items {
-  border-radius: 4px;
-  font-family: Arial, Helvetica, sans-serif
-}
-
-.add-thread-button {
-  border: 1px solid #404040;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: Arial, Helvetica, sans-serif
-}
-
 .add-thread-input {
   border-radius: 5px;
-  border: 1px solid #404040;
-}
-
-.replies-author {
-  display: flex;
-}
-
-
-.replies-span {
-  display: flex;
-  justify-content: space-between;
 }
 
 @media screen and (min-width: 450px) {
