@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
-import convertTime from "./convertTime";
-import { AppContext } from "./AppContext";
+import convertTime from "./shared/functions/convertTime";
+import { AppContext } from "./shared/context/AppContext";
 import playButton from "./audio-icons/play-black.png";
 import pauseButton from "./audio-icons/pause-black.png";
-import useHandleSpeak from "./audio-functions/useHandleSpeak.js";
-import useHandlePause from "./audio-functions/useHandlePause.js";
+import useHandleSpeak from "./shared/functions/audio-functions/useHandleSpeak";
+import useHandlePause from "./shared/functions/audio-functions/useHandlePause";
 
 export default function OriginalPost({
   title,

@@ -2,7 +2,7 @@ import OriginalPost from "./OriginalPost";
 import Replies from "./Replies";
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { AppContext } from "./AppContext";
+import { AppContext } from "./shared/context/AppContext";
 
 export default function Thread() {
   const { savedThreads } = useContext(AppContext);
