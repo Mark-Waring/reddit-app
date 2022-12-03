@@ -5,7 +5,7 @@ import { auth } from "./firebase.config";
 import { signOut } from "firebase/auth";
 
 export default function NavBar() {
-  const { user, setUser } = useContext(AppContext);
+  const { setUser } = useContext(AppContext);
 
   async function logOut() {
     try {

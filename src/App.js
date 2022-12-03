@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (!user) return;
-    get(child(dbRef, `saved-threads/${user.uid}`))
+    get(child(dbRef, `api/${user.uid}/saved-threads/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setSavedThreads(snapshot.val());

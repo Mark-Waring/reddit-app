@@ -116,7 +116,7 @@ export default function ThreadAdd() {
 
   useEffect(() => {
     if (savedThreads) {
-      set(ref(db, `saved-threads/${user.uid}`), savedThreads);
+      set(ref(db, `api/${user.uid}/saved-threads`), savedThreads);
     }
     // eslint-disable-next-line
   }, [savedThreads]);

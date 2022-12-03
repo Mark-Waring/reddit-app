@@ -43,7 +43,8 @@ export default function GlobalAudioPlayer() {
   }, [progress]);
 
   useEffect(() => {
-    if (currentAudio) set(ref(db, `saved-threads/${user?.uid}`), savedThreads);
+    if (currentAudio)
+      set(ref(db, `/api/${user?.uid}/saved-threads`), savedThreads);
     // eslint-disable-next-line
   }, [isPaused, currentAudio]);
 
