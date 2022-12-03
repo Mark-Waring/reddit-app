@@ -1,5 +1,5 @@
 {
-  "name": "reddit-app-2",
+  "name": "reddit-app-1",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080",

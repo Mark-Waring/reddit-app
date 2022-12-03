@@ -15,6 +15,7 @@ export default function NavBar() {
     } catch (error) {
       console.error("Unable to sign out");
     }
+    window.speechSynthesis.cancel();
   }
 
   return (
