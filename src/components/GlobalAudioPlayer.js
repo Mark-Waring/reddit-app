@@ -1,13 +1,13 @@
 import { useContext, useEffect } from "react";
-import { AppContext } from "./AppContext";
-import backButton from "./audio-icons/back.png";
-import playButton from "./audio-icons/play.png";
-import pauseButton from "./audio-icons/pause.png";
-import fwdButton from "./audio-icons/fwd.png";
-import useHandleSpeak from "./audio-functions/useHandleSpeak.js";
-import useHandlePause from "./audio-functions/useHandlePause.js";
-import useHandleRewind from "./audio-functions/useHandleRewind";
-import useHandleFwd from "./audio-functions/useHandleFwd";
+import { AppContext } from "../shared/context/AppContext";
+import backButton from "../shared/audio-icons/back.png";
+import playButton from "../shared/audio-icons/play.png";
+import pauseButton from "../shared/audio-icons/pause.png";
+import fwdButton from "../shared/audio-icons/fwd.png";
+import useHandleSpeak from "../shared/functions/audio-functions/useHandleSpeak";
+import useHandlePause from "../shared/functions/audio-functions/useHandlePause";
+import useHandleRewind from "../shared/functions/audio-functions/useHandleRewind";
+import useHandleFwd from "../shared/functions/audio-functions/useHandleFwd";
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function GlobalAudioPlayer() {

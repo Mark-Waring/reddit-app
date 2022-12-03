@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { AppContext } from "./AppContext";
-import convertTime from "./convertTime";
+import { AppContext } from "../shared/context/AppContext";
+import convertTime from "../shared/functions/convertTime";
 
 export default function Replies({ repliesArray }) {
   const { sort } = useContext(AppContext);

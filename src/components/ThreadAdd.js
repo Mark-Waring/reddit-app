@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState, useEffect } from "react";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../shared/context/AppContext";
 import SavedThreads from "./SavedThreads";
-import getThread, { getHeader } from "./getThread";
+import getThread, { getHeader } from "../functions/getThread";
 import Form from "react-bootstrap/Form";
 import { getDatabase, ref, set } from "firebase/database";
 

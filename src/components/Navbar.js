@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AppContext } from "./AppContext";
-import { auth } from "./firebase.config";
+import { AppContext } from "../shared/context/AppContext";
+import { auth } from "../firebase.config";
 import { signOut } from "firebase/auth";
 
 export default function NavBar() {

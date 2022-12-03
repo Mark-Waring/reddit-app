@@ -1,14 +1,19 @@
 import "./index.css";
-import ThreadAdd from "./ThreadAdd";
-import Thread from "./Thread";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ThreadAdd from "./components/ThreadAdd";
+import Thread from "./components/Thread";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { auth } from "./firebase.config";
-import GlobalAudioPlayer from "./GlobalAudioPlayer.js";
+import GlobalAudioPlayer from "./components/GlobalAudioPlayer";
 import { useContext, useEffect } from "react";
-import { AppContext } from "./AppContext";
-import LoginPage from "./LoginPage";
+import { AppContext } from "./shared/context/AppContext";
+import LoginPage from "./components/LoginPage";
 import { getDatabase, ref, child, get } from "firebase/database";
-import NavBar from "./Navbar";
+import NavBar from "./components/Navbar";
 
 function App() {
   const dbRef = ref(getDatabase());
@@ -39,11 +44,19 @@ function App() {
         <NavBar />
         <Routes>
           <Route
+            path="/login"
+            element={!user ? <LoginPage /> : <Navigate to="/threads" />}
+          />
+          <Route
             exact
-            path="/"
+            path="/threads"
             element={user ? <ThreadAdd /> : <LoginPage />}
           />
-          <Route path=":threadId" element={user ? <Thread /> : <LoginPage />} />
+          <Route
+            path="/threads/:threadId"
+            element={user ? <Thread /> : <LoginPage />}
+          />
+          <Route path="*" element={<Navigate to="/threads" />} />
         </Routes>
         {audioIsPlaying && <GlobalAudioPlayer />}
       </div>

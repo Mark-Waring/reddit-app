@@ -1,5 +1,5 @@
 import { useState, createContext, useRef } from "react";
-import convertTime from "./convertTime";
+import convertTime from "../functions/convertTime";
 export const AppContext = createContext();
 
 export function AppProvider(props) {

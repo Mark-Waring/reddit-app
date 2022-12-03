@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../shared/context/AppContext";
 import SavedThread from "./SavedThread";
 
 export default function SavedThreads() {

@@ -1,11 +1,11 @@
-import { auth } from "./firebase.config";
+import { auth } from "../firebase.config";
 import {
   GoogleAuthProvider,
   signInWithPopup,
   setPersistence,
   browserLocalPersistence,
 } from "firebase/auth";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../shared/context/AppContext";
 import { useContext } from "react";
 
 const provider = new GoogleAuthProvider();
