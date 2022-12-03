@@ -35,11 +35,11 @@ body {
   cursor: pointer;
 }
 
-button:hover {
+button:hover:enabled {
   opacity: 75%;
 }
 
-button:active {
+button:active:enabled {
   transform: scale(.98);
 
 }
@@ -165,6 +165,7 @@ code {
   justify-content: center;
   bottom: 0;
   position: fixed;
+  box-shadow: 0 4px 12px 0
 }
 
 .audio-button {

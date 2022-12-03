@@ -42,7 +42,7 @@ export default function SavedThread({ thread }) {
 
   function handleDelete(e) {
     if (isListening) {
-      handlePause();
+      window.speechSynthesis.cancel();
       setAudioIsPlaying(false);
     }
     const updatedSaved = savedThreads.filter((thread) => {

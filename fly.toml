@@ -1,6 +1,6 @@
-# fly.toml file generated for read-it-tts on 2022-12-02T23:01:58-06:00
+# fly.toml file generated for read-it on 2022-12-03T08:58:12-06:00
 
-app = "read-it-tts"
+app = "read-it"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
