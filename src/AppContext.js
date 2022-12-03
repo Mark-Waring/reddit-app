@@ -37,7 +37,9 @@ export function AppProvider(props) {
   }
 
   function readIt(thread) {
-    return `${readThread(thread)} ${readReplies(thread?.repliesArray)}`;
+    return `${readThread(thread).replaceAll("_", " ")} ${readReplies(
+      thread?.repliesArray
+    ).replaceAll("_", " ")}`;
   }
 
   const value = {

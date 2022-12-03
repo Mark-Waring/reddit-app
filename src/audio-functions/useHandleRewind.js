@@ -7,7 +7,7 @@ export default function useHandleRewind() {
 
   function handleRewind() {
     window.speechSynthesis.cancel();
-    if (currentAudio.progress >= 60) {
+    if (currentAudio.progress <= 60) {
       currentAudio.progress = 0;
       prevProgress.current = 0;
     }
