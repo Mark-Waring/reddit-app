@@ -73,7 +73,6 @@ body,
 .global-audio-details,
 .thread-play-container,
 .op-details-bottom,
-.thread-audio-container,
 .audio-control-container {
   align-items: center;
 }
@@ -123,10 +122,6 @@ a:visited {
   border-radius: 10px;
 }
 
-.saved-details-left,
-.saved-details {
-  height: -webkit-fill-available;
-}
 
 .login-button {
   width: 35%;
@@ -193,6 +188,10 @@ button:active:enabled {
 .audio-container,
 .progress-bar {
   flex-grow: 1;
+}
+
+.thread-audio-container {
+  align-items: flex-start;
 }
 
 .audio-container,
@@ -263,9 +262,9 @@ hr,
 .global-audio-details,
 .thread-audio-button,
 .thread-container,
-.nav-bar {
+.nav-bar,
+.op-title-span {
   width: 100%;
-
 }
 
 .global-player-container {
@@ -323,6 +322,8 @@ hr,
 
 .op-title-span,
 .saved-details-left,
+.saved-right-align,
+.saved-left-align,
 .replies-span {
   justify-content: space-between;
 }
