@@ -41,7 +41,6 @@ export default function ThreadAdd() {
     },
     enabled: !!url,
   });
-
   function getReplyData(base) {
     return base?.map((post) => {
       const baseData = post?.data;
@@ -51,7 +50,7 @@ export default function ThreadAdd() {
           baseData.author_flair_richtext &&
           baseData.author_flair_richtext[1]?.t,
         time: Math.floor((now - baseData?.created_utc) / 60),
-        body: baseData.body,
+        body: baseData.body?.replace(/amp;/, " "),
         bodyHtml: baseData.body_html,
         score: baseData.score,
         replyNumber: baseData.replies?.data?.children?.length,
@@ -93,14 +92,15 @@ export default function ThreadAdd() {
       setThreadInput("Thread already in library");
       return setIsDuplicate(true);
     }
+
     setSavedThreads([
       {
-        title: postData.title,
+        title: postData.title?.replaceAll("amp;", ""),
         id: postData.id,
         author: postData.author,
         flair: postData.flair || "",
         time: postData.time,
-        body: postData.body,
+        body: postData.body?.replaceAll("amp;", " "),
         score: postData.score,
         subreddit: postData.subreddit,
         header: headerImage,

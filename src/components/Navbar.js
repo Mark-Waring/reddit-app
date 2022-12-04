@@ -3,9 +3,11 @@ import { useContext } from "react";
 import { AppContext } from "../shared/context/AppContext";
 import { auth } from "../firebase.config";
 import { signOut } from "firebase/auth";
+import useHandlePause from "../shared/functions/audio-functions/useHandlePause";
 
 export default function NavBar() {
   const { setUser, setAudioIsPlaying } = useContext(AppContext);
+  const [handlePause] = useHandlePause();
 
   async function logOut() {
     try {
@@ -15,7 +17,7 @@ export default function NavBar() {
     } catch (error) {
       console.error("Unable to sign out");
     }
-    window.speechSynthesis.cancel();
+    handlePause();
     setAudioIsPlaying(false);
   }
 

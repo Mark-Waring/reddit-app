@@ -28,12 +28,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node server.js",
-    "front": "react-scripts start",
-    "build-front": "react-scripts build",
-    "build": "npm-run-all prod build-front",
+    "start": "node server",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "front": "react-scripts start",
     "back": "SET NODE_ENV=DEVELOPMENT && nodemon --exec babel-node server.js",
     "prod": "webpack --config webpack.config.server.js"
   },

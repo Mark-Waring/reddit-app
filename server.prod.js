@@ -19789,13 +19789,7 @@ __webpack_require__.r(__webpack_exports__);
 var app = express__WEBPACK_IMPORTED_MODULE_0___default()();
 var PORT = process && process.env && process.env.PORT || undefined || 8080;
 app.use(express__WEBPACK_IMPORTED_MODULE_0___default()["static"](__dirname + "/build"));
-// app.use(express.json());
-if ((process && process.env && "production" || undefined) === "production") {
-  app.enable("trust proxy");
-  app.use(function (req, res, next) {
-    req.secure ? next() : res.redirect("https://" + req.headers.host + req.url);
-  });
-}
+app.use(express__WEBPACK_IMPORTED_MODULE_0___default().json());
 // // app.use(cookieParser());
 // // app.use(passport.initialize());
 // app.use("/api/users", userRoutes);
