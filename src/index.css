@@ -262,8 +262,7 @@ hr,
 .global-audio-details,
 .thread-audio-button,
 .thread-container,
-.nav-bar,
-.op-title-span {
+.nav-bar {
   width: 100%;
 }
 
@@ -427,7 +426,8 @@ hr,
   max-height: 75px;
 }
 
-.saved-left-align {
+.saved-left-align,
+.op-title-span {
   width: -webkit-fill-available;
 }
 
