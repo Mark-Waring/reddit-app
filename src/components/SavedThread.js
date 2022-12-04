@@ -55,10 +55,12 @@ export default function SavedThread({ thread }) {
     <>
       <div className="saved-thread">
         <div className="saved-left-align">
-          <NavLink to={thread.id}>{thread.title}</NavLink>
+          <div className="saved-title-wrapper">
+            <NavLink to={thread.id}>{thread.title}</NavLink>
+            <div className="thread-subreddit">{thread.subreddit}</div>
+          </div>
           <div className="saved-details">
             <div className="saved-details-left">
-              <div className="thread-subreddit">{thread.subreddit}</div>
               <button
                 alt={"delete"}
                 value={thread.id}
